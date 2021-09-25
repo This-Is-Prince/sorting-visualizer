@@ -6,6 +6,7 @@ export interface AppStateType {
   whichAlgorithm: string;
   speed: "slow" | "fast" | "normal";
   isBannerOpen: boolean;
+  size: number;
 }
 const AppInitialState: AppStateType = {
   isPlay: false,
@@ -14,5 +15,6 @@ const AppInitialState: AppStateType = {
   whichAlgorithm: "",
   speed: "normal",
   isBannerOpen: false,
+  size: 10,
 };
 export default AppInitialState;

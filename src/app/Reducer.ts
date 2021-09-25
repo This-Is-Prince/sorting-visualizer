@@ -6,6 +6,7 @@ import gsapCore from "gsap/gsap-core";
 export type ActionType =
   | { type: "PLAY" }
   | { type: "ADD_ALGORITHM"; payload: string }
+  | { type: "ADD_SIZE"; payload: number }
   | { type: "ADD_SPEED"; payload: "slow" | "fast" | "normal" }
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" };
@@ -13,6 +14,12 @@ export type ActionType =
 export type ReducerType<S, A> = (state: S, action: A) => S;
 
 const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
+  if (action.type === "ADD_SIZE") {
+    return {
+      ...state,
+      size: action.payload,
+    };
+  }
   if (action.type === "ADD_ALGORITHM") {
     return {
       ...state,

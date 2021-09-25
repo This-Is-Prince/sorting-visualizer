@@ -115,20 +115,7 @@ body {
   border-right: 0.5rem solid transparent;
   border-bottom: 0.5rem solid transparent;
 }
-@media screen and (min-width: 776px) {
-  .algo__banner {
-    font-size: 1.25rem;
-  }
-  #root {
-    --height: 60px;
-  }
-  .btn {
-    font-size: 3rem;
-  }
-  .modal__header > h2 {
-    font-size: 2rem;
-  }
-}
+
 .modal__header > button {
   width: auto;
   background-color: transparent;
@@ -151,9 +138,9 @@ body {
 }
 .radio {
   appearance: none;
-  width: 2rem;
-  height: 2rem;
-  border: 0.2rem solid var(--clr-btn);
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.15rem solid var(--clr-btn);
   cursor: pointer;
   position: relative;
 }
@@ -168,15 +155,43 @@ body {
 .radio:checked::before {
   display: block;
 }
+@media screen and (min-width: 776px) {
+  .radio {
+    width: 2rem;
+    height: 2rem;
+    border: 0.2rem solid var(--clr-btn);
+  }
+  .algo__banner {
+    font-size: 1.25rem;
+  }
+  #root {
+    --height: 60px;
+  }
+  .btn {
+    font-size: 3rem;
+  }
+  .modal__header > h2 {
+    font-size: 2rem;
+  }
+}
 .choose span:first-child {
   margin-right: 2rem;
   font-size: 2rem;
+}
+.range-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2rem;
 }
 .range {
   appearance: none;
   width: 100%;
   background-color: var(--clr-highlight);
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.75);
+  background-color: var(--clr-btn);
   border-radius: 1rem;
   height: 20px;
   cursor: pointer;
@@ -185,30 +200,16 @@ body {
   appearance: none;
   width: 30px;
   height: 30px;
-  background-color: var(--clr-btn);
+  background-color: var(--clr-highlight);
   border-radius: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
-/* .range {
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
-  appearance: none;
-  width: 100%;
-  display: block;
-  border-radius: 1rem;
-  background-color: var(--clr-highlight);
-  color: var(--clr-btn);
-  padding: 0.2rem;
-}
-.range::-webkit-slider-thumb {
-  appearance: none;
-  width: 15px;
-  height: 15px;
+.bubble {
+  padding: 0.5rem 0;
+  min-width: 70px;
+  font-weight: 600;
+  font-size: 1.25rem;
   background-color: var(--clr-btn);
-  border-radius: 50%;
-  cursor: pointer;
+  color: var(--clr-highlight);
+  border-radius: 0.25rem;
 }
-.range:hover {
-  background-color: var(--clr-btn);
-}
-.range:hover::-webkit-slider-thumb {
-  background-color: var(--clr-highlight);
-} */
