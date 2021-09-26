@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AppContext from "../../app/AppContext";
+import * as d3 from "d3";
 
 const Size = () => {
   const { AppState, dispatch } = useContext(AppContext);
@@ -19,7 +20,7 @@ const Size = () => {
           min="10"
           value={AppState.size}
           onChange={handleOnChange}
-          max="200"
+          max={`${AppState.svg.width < 500 ? 50 : 100}`}
           className="range"
         />
       </div>

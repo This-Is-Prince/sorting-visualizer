@@ -7,6 +7,12 @@ export interface AppStateType {
   speed: "slow" | "fast" | "normal";
   isBannerOpen: boolean;
   size: number;
+  bars: any[];
+  svg: {
+    box: any;
+    width: number;
+    height: number;
+  };
 }
 const AppInitialState: AppStateType = {
   isPlay: false,
@@ -16,5 +22,7 @@ const AppInitialState: AppStateType = {
   speed: "normal",
   isBannerOpen: false,
   size: 10,
+  bars: [],
+  svg: { box: undefined, height: window.innerHeight, width: window.innerWidth },
 };
 export default AppInitialState;
