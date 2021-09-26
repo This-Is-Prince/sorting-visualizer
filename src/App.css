@@ -76,7 +76,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: var(--modal-z-index);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   transform: translateX(-100%);
   display: flex;
   justify-content: center;
