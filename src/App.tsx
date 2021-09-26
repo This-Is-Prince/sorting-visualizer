@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import "./App.css";
 import Reducer from "./app/Reducer";
 import AppInitialState, { AppStateType } from "./app/State";
-import Header from "./components/Footer";
+import Footer from "./components/Footer";
 import Main from "./components/Main";
 import AppContext from "./app/AppContext";
 import Modal from "./components/modal/Modal";
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <AppContext.Provider value={{ AppState, dispatch }}>
       <Main />
-      <Header />
+      <Footer />
       <Modal />
     </AppContext.Provider>
   );

@@ -17,6 +17,7 @@
 
   /* z-index*/
   --modal-z-index: 100;
+  --footer-z-index: 99;
 }
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -39,7 +40,9 @@ body {
   height: var(--height);
   display: flex;
   align-items: center;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }
 .flex-center {
   display: flex;
