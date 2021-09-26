@@ -6,7 +6,6 @@ import AppContext from "../../app/AppContext";
 const Speed = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
     const value = e.currentTarget.value as "slow" | "fast" | "normal";
     dispatch({ type: "ADD_SPEED", payload: value });
   };

@@ -33,7 +33,9 @@ const Footer = () => {
         <VscSymbolArray />
       </button>
       <button
-        className="flex-center btn algo"
+        className={`${
+          AppState.isBannerOpen ? "banner-open" : ""
+        } flex-center btn algo`}
         aria-label="algorithm"
         onClick={() => {
           dispatch({
@@ -43,7 +45,13 @@ const Footer = () => {
         }}
       >
         <FaSitemap />
-        <span className="algo__banner">Choose Algorithm</span>
+        <span
+          className={`algo__banner ${
+            AppState.isBannerOpen ? "banner-open" : ""
+          }`}
+        >
+          Choose Algorithm
+        </span>
       </button>
       <button
         className="flex-center btn"

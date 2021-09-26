@@ -4,7 +4,6 @@ import AppContext from "../../app/AppContext";
 const Size = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
     const value = parseInt(e.currentTarget.value);
     dispatch({
       type: "ADD_SIZE",
@@ -13,7 +12,7 @@ const Size = () => {
   };
   return (
     <article className="modal__content">
-      <div className="flex-center range-container ">
+      <div className="flex-center range-container">
         <output className="bubble flex-center">{AppState.size}</output>
         <input
           type="range"
