@@ -15,6 +15,7 @@ const Speed = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="slow"
           name="speed"
           checked={AppState.speed === "slow"}
           onChange={handleOnChange}
@@ -31,6 +32,7 @@ const Speed = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="normal"
           name="speed"
           checked={AppState.speed === "normal"}
           onChange={handleOnChange}
@@ -47,6 +49,7 @@ const Speed = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="fast"
           name="speed"
           checked={AppState.speed === "fast"}
           onChange={handleOnChange}

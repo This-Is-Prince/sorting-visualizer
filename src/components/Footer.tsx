@@ -10,6 +10,7 @@ const Footer = () => {
     <footer className="footer">
       <button
         className="flex-center btn"
+        aria-label="speed"
         onClick={() => {
           dispatch({
             type: "OPEN_MODAL",
@@ -21,6 +22,7 @@ const Footer = () => {
       </button>
       <button
         className="flex-center btn"
+        aria-label="size"
         onClick={() => {
           dispatch({
             type: "OPEN_MODAL",
@@ -32,6 +34,7 @@ const Footer = () => {
       </button>
       <button
         className="flex-center btn algo"
+        aria-label="algorithm"
         onClick={() => {
           dispatch({
             type: "OPEN_MODAL",
@@ -44,6 +47,7 @@ const Footer = () => {
       </button>
       <button
         className="flex-center btn"
+        aria-label="play/pause"
         onClick={() => {
           dispatch({
             type: "PLAY",

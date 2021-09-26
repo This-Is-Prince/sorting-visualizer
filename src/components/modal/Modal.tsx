@@ -15,6 +15,7 @@ const Modal = () => {
           <h2>{AppState.modalState.for}</h2>
           <button
             className="btn flex-center"
+            aria-label="close"
             onClick={() => {
               dispatch({
                 type: "CLOSE_MODAL",

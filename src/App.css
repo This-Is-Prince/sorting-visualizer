@@ -34,6 +34,7 @@ body {
 }
 .main {
   height: calc(100% - var(--height));
+  color: var(--clr-main);
 }
 .footer {
   background-color: var(--clr-main);

@@ -14,6 +14,7 @@ const Algorithm = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="bubble"
           name="algorithm"
           value="bubble"
           className="radio flex-center"
@@ -24,6 +25,7 @@ const Algorithm = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="merge"
           name="algorithm"
           value="merge"
           className="radio flex-center"
@@ -34,6 +36,7 @@ const Algorithm = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="heap"
           name="algorithm"
           value="heap"
           className="radio flex-center"
@@ -44,6 +47,7 @@ const Algorithm = () => {
       <div className="choose">
         <input
           type="radio"
+          aria-label="quick"
           name="algorithm"
           value="quick"
           className="radio flex-center"
