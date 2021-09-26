@@ -8,6 +8,10 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+window.addEventListener("beforeinstallprompt", (event) => {
+  console.log("beforeinstallprompt fired");
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
