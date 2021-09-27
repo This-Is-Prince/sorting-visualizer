@@ -5,6 +5,7 @@ export type ActionType =
   | { type: "PLAY" }
   | { type: "SELECT_ALGORITHM" }
   | { type: "SELECT_ARRAY" }
+  | { type: "SORT_DONE" }
   | { type: "ADD_ALGORITHM"; payload: string }
   | { type: "ADD_SIZE"; payload: number }
   | { type: "ADD_SPEED"; payload: "SLOW" | "FAST" | "NORMAL" }
@@ -17,6 +18,12 @@ export type ActionType =
 export type ReducerType<S, A> = (state: S, action: A) => S;
 
 const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
+  if (action.type === "SORT_DONE") {
+    return {
+      ...state,
+      isSortDone: true,
+    };
+  }
   if (action.type === "CHANGE_SCREEN") {
     return {
       ...state,
@@ -59,6 +66,7 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       ...state,
       size,
       bars,
+      isSortDone: false,
       isSizeBannerOpen: false,
     };
   }

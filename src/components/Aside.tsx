@@ -8,10 +8,21 @@ import { Bar } from "../app/State";
 let sortBars: Bar[];
 
 const Aside = () => {
+  const checkEvent = (event: React.MouseEvent) => {
+    if (AppState.isPlay) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+    return true;
+  };
   const { AppState, dispatch } = useContext(AppContext);
   const swapDone = () => {
     dispatch({
       type: "PLAY",
+    });
+    dispatch({
+      type: "SORT_DONE",
     });
     dispatch({
       type: "ADD_BARS",
@@ -25,11 +36,8 @@ const Aside = () => {
     };
   }, []);
   const handlePlay = (event: React.MouseEvent) => {
-    if (AppState.isPlay) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
+    if (!checkEvent(event)) return;
+
     if (AppState.whichAlgorithm === "") {
       dispatch({
         type: "SELECT_ALGORITHM",
@@ -42,12 +50,18 @@ const Aside = () => {
       });
       return;
     }
-    let speed =
-      AppState.speed === "FAST" ? 0 : AppState.speed === "NORMAL" ? 250 : 500;
-    sortBars = Sort(AppState.whichAlgorithm, speed, AppState.bars);
-    dispatch({
-      type: "PLAY",
-    });
+    if (!AppState.isSortDone) {
+      let speed =
+        AppState.speed === "FAST" ? 0 : AppState.speed === "NORMAL" ? 250 : 500;
+      sortBars = Sort(AppState.whichAlgorithm, speed, AppState.bars);
+      dispatch({
+        type: "PLAY",
+      });
+    } else {
+      dispatch({
+        type: "SELECT_ARRAY",
+      });
+    }
   };
   return (
     <aside className="aside">
@@ -55,15 +69,12 @@ const Aside = () => {
         className="flex-center btn"
         aria-label="speed"
         onClick={(event) => {
-          if (AppState.isPlay) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
+          if (checkEvent(event)) {
+            dispatch({
+              type: "OPEN_MODAL",
+              payload: { for: "change speed", id: 1 },
+            });
           }
-          dispatch({
-            type: "OPEN_MODAL",
-            payload: { for: "change speed", id: 1 },
-          });
         }}
       >
         <IoMdSpeedometer />
@@ -74,15 +85,12 @@ const Aside = () => {
         }`}
         aria-label="size"
         onClick={(event) => {
-          if (AppState.isPlay) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
+          if (checkEvent(event)) {
+            dispatch({
+              type: "OPEN_MODAL",
+              payload: { for: "change size", id: 2 },
+            });
           }
-          dispatch({
-            type: "OPEN_MODAL",
-            payload: { for: "change size", id: 2 },
-          });
         }}
       >
         <VscSymbolArray />
@@ -93,15 +101,12 @@ const Aside = () => {
         } flex-center btn algo`}
         aria-label="algorithm"
         onClick={(event) => {
-          if (AppState.isPlay) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
+          if (checkEvent(event)) {
+            dispatch({
+              type: "OPEN_MODAL",
+              payload: { for: "choose algorithm", id: 3 },
+            });
           }
-          dispatch({
-            type: "OPEN_MODAL",
-            payload: { for: "choose algorithm", id: 3 },
-          });
         }}
       >
         <FaSitemap />
