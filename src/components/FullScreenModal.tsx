@@ -1,25 +1,26 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import AppContext from "../app/AppContext";
 
 const FullScreenModal = () => {
-  const { AppState, dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
   const handleFullScreen = () => {
     const fullScreenCheck = () => {
       if (document.fullscreenElement) return;
       return document.documentElement.requestFullscreen();
     };
-    dispatch({
-      type: "CHANGE_SCREEN",
-    });
+
     const rotate = async () => {
       try {
-        await fullScreenCheck();
         if (
           screen.orientation.type !== "landscape-secondary" &&
           screen.orientation.type !== "landscape-primary"
         ) {
+          await fullScreenCheck();
           await screen.orientation.lock("landscape");
         }
+        dispatch({
+          type: "CHANGE_SCREEN",
+        });
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +30,7 @@ const FullScreenModal = () => {
   return (
     <div className="full-screen-modal flex-center">
       <button className="btn" onClick={handleFullScreen}>
-        Full Screen
+        tap to go..
       </button>
     </div>
   );

@@ -83,6 +83,6 @@ const AppInitialState: AppStateType = {
   size: 10,
   bars: [],
   svg: { box: undefined, height: 0, width: 0 },
-  isFullScreen: true,
+  isFullScreen: false,
 };
 export default AppInitialState;

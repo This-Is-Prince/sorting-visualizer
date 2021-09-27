@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import "./App.css";
 import Reducer from "./app/Reducer";
-import AppInitialState, { AppStateType } from "./app/State";
+import AppInitialState from "./app/State";
 import Aside from "./components/Aside";
 import Main from "./components/Main";
 import AppContext from "./app/AppContext";
@@ -24,7 +24,7 @@ const App = () => {
   }, []);
   return (
     <AppContext.Provider value={{ AppState, dispatch }}>
-      {AppState.isFullScreen && <FullScreenModal />}
+      {AppState.isFullScreen || <FullScreenModal />}
       <Aside />
       <Main />
       <Modal />

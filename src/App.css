@@ -47,6 +47,9 @@
   color: var(--clr-text);
 }
 @media screen and (orientation: landscape) {
+  .full-screen-modal {
+    background-image: url("./images/desktop.svg");
+  }
   .full-screen-modal > .btn {
     border-width: 0.2rem;
     font-size: 2rem;
@@ -64,8 +67,14 @@ body {
   letter-spacing: 0.2rem;
   text-transform: capitalize;
   font-variant: small-caps;
-  user-select: none;
   background-color: var(--clr-bg);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .flex-center {
   display: flex;
@@ -113,6 +122,10 @@ GLOBAL CSS END
 }
 
 .btn {
+  text-transform: capitalize;
+  font-variant: small-caps;
+  font-style: italic;
+  letter-spacing: 0.2rem;
   border: none;
   background-color: transparent;
   color: currentColor;
