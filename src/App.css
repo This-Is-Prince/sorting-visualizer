@@ -17,9 +17,42 @@
 
   /* z-index*/
   --modal-z-index: 100;
+  --full-screen-modal-z-index: 101;
   --footer-z-index: 99;
 }
-
+.full-screen-modal {
+  position: absolute;
+  z-index: var(--full-screen-modal-z-index);
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./images/phone.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.full-screen-modal > .btn {
+  width: auto;
+  height: auto;
+  background-color: var(--clr-text);
+  border: 0.15rem solid var(--clr-text);
+  font-size: 1.5rem;
+  color: var(--clr-ter);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+.full-screen-modal > .btn:hover {
+  background-color: transparent;
+  color: var(--clr-text);
+}
+@media screen and (orientation: landscape) {
+  .full-screen-modal > .btn {
+    border-width: 0.2rem;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+  }
+}
 /* 
 =============
 GLOBAL CSS START

@@ -2,6 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
+// orientation
+// let orn = screen.orientation;
+// console.log(orn);
+// orn.onchange = (event) => {
+//   console.log(orn.type);
+// };
+
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("../sw.js").then(() => {
     // console.log("Service Worker Registered!");

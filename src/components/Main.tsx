@@ -7,6 +7,9 @@ const Main = () => {
   const resize = () => {
     let width = window.innerWidth;
     let height = window.innerHeight - 60;
+    console.log("Width :- " + width);
+    console.log("height :- " + height);
+
     d3.select("#box").remove();
     let box = d3
       .select("#main")

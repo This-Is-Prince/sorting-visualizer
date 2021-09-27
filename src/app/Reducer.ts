@@ -10,11 +10,18 @@ export type ActionType =
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" }
   | { type: "ADD_BARS"; payload: any[] }
+  | { type: "CHANGE_SCREEN" }
   | { type: "ADD_SVG"; payload: any };
 
 export type ReducerType<S, A> = (state: S, action: A) => S;
 
 const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
+  if (action.type === "CHANGE_SCREEN") {
+    return {
+      ...state,
+      isFullScreen: !state.isFullScreen,
+    };
+  }
   if (action.type === "ADD_SVG") {
     return {
       ...state,

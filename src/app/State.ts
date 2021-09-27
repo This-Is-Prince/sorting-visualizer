@@ -13,6 +13,7 @@ export interface AppStateType {
     width: number;
     height: number;
   };
+  isFullScreen: boolean;
 }
 const AppInitialState: AppStateType = {
   isPlay: false,
@@ -24,5 +25,6 @@ const AppInitialState: AppStateType = {
   size: 10,
   bars: [],
   svg: { box: undefined, height: window.innerHeight, width: window.innerWidth },
+  isFullScreen: true,
 };
 export default AppInitialState;
