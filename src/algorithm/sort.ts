@@ -1,6 +1,7 @@
 import { Bar } from "../app/State";
 import * as d3 from "d3";
 import bubbleSort from "./bubble";
+import quickSort from "./quick";
 const swapEvent = new Event("swap-done");
 interface ArrType {
   first: Bar;
@@ -48,7 +49,8 @@ let swap = (arr: ArrType[], currIndex: number, speed: number) => {
     });
 };
 const Sort = (algo: string, speed: number, bars: Bar[]) => {
-  let { bars: sortBars, sortArr: arr } = bubbleSort(bars);
+  // let { bars: sortBars, sortArr: arr } = bubbleSort(bars);
+  let { bars: sortBars, sortArr: arr } = quickSort(bars);
   isSwap = true;
   let index = -1;
   intervalID = setInterval(() => {
