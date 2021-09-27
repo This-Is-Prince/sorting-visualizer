@@ -3,11 +3,12 @@ import { IoMdSpeedometer } from "react-icons/io";
 import { VscSymbolArray } from "react-icons/vsc";
 import { FaPauseCircle, FaPlayCircle, FaSitemap } from "react-icons/fa";
 import AppContext from "../app/AppContext";
+import * as d3 from "d3";
 
-const Footer = () => {
+const Aside = () => {
   const { AppState, dispatch } = useContext(AppContext);
   return (
-    <footer className="footer">
+    <aside className="aside">
       <button
         className="flex-center btn"
         aria-label="speed"
@@ -45,13 +46,6 @@ const Footer = () => {
         }}
       >
         <FaSitemap />
-        <span
-          className={`algo__banner ${
-            AppState.isBannerOpen ? "banner-open" : ""
-          }`}
-        >
-          Choose Algorithm
-        </span>
       </button>
       <button
         className="flex-center btn"
@@ -64,8 +58,8 @@ const Footer = () => {
       >
         {AppState.isPlay ? <FaPauseCircle /> : <FaPlayCircle />}
       </button>
-    </footer>
+    </aside>
   );
 };
 
-export default Footer;
+export default Aside;

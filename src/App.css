@@ -80,26 +80,36 @@ GLOBAL CSS END
 
 #root {
   height: 100vh;
-  --height: 50px;
+  width: 100vw;
+  --width: 50px;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+svg {
+  transform: scaleY(-1);
 }
 .main {
-  height: calc(100% - var(--height));
+  width: calc(100vw - var(--width));
+  height: 100vh;
   color: var(--clr-text);
-}
-.footer {
-  height: var(--height);
   display: flex;
   align-items: center;
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
+  justify-content: center;
+}
+.aside {
+  position: relative;
+  width: var(--width);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.25);
-  background-image: url("./images/footer.svg");
+  background-image: url("./images/aside.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
+
 .btn {
   border: none;
   background-color: transparent;
@@ -124,30 +134,7 @@ GLOBAL CSS END
   background-color: var(--clr-sec);
   color: var(--clr-text);
 }
-.algo__banner {
-  position: absolute;
-  background-color: transparent;
-  color: var(--clr-text);
-  font-size: 0.75rem;
-  left: 0;
-  right: 0;
-  bottom: 120%;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  transform: scale(0);
-  transition: background-color 0.2s ease-in, color 0.2s ease-in,
-    transform 0.2s ease-in;
-}
-.algo__banner::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 0.5rem solid var(--clr-sec);
-  bottom: -1rem;
-  border-right: 0.5rem solid transparent;
-  border-bottom: 0.5rem solid transparent;
-}
+
 .banner-open {
   transform: scale(1);
   background-color: var(--clr-sec);
@@ -254,7 +241,7 @@ GLOBAL CSS END
   color: var(--clr-text);
   border-radius: 0.25rem;
 }
-@media screen and (min-width: 776px) {
+@media screen and (min-width: 776px) and (min-height: 776px) {
   .bubble {
     font-size: 1.5rem;
     padding: 0.75rem 0;
@@ -272,11 +259,8 @@ GLOBAL CSS END
     height: 2rem;
     border-width: 0.2rem;
   }
-  .algo__banner {
-    font-size: 1.25rem;
-  }
   #root {
-    --height: 60px;
+    --width: 60px;
   }
   .btn {
     font-size: 3rem;

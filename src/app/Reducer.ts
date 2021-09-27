@@ -1,5 +1,6 @@
 import React from "react";
-import { AppStateType, ModalOpenPayloadType } from "./State";
+import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
+
 import gsap from "gsap";
 
 export type ActionType =
@@ -35,18 +36,22 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     };
   }
   if (action.type === "ADD_SIZE") {
-    let bars = [];
+    let bars: Bar[] = [];
     let size = action.payload;
     let width = state.svg.width;
     let height = state.svg.height;
     let ratio = (width - size * 2) / size;
 
     for (let i = 0; i < size; i++) {
-      let obj = {
-        width: ratio,
-        height: Math.floor(Math.random() * height),
-      };
-      bars.push(obj);
+      let bar = new Bar(
+        ratio,
+        Math.floor(Math.random() * height),
+        `bar-${i}`,
+        "#00214d",
+        0,
+        ratio * i + 2 * i
+      );
+      bars.push(bar);
     }
     return {
       ...state,

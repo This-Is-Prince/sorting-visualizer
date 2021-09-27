@@ -20,7 +20,9 @@ const Size = () => {
           min="10"
           value={AppState.size}
           onChange={handleOnChange}
-          max={`${AppState.svg.width < 500 ? 50 : 100}`}
+          max={`${
+            AppState.svg.width < 776 && AppState.svg.height < 776 ? 50 : 100
+          }`}
           className="range"
         />
       </div>

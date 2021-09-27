@@ -1,15 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
 
 const Main = () => {
+  const mainRef = useRef<HTMLElement>({} as HTMLElement);
+
   const { AppState, dispatch } = useContext(AppContext);
   const resize = () => {
-    let width = window.innerWidth;
-    let height = window.innerHeight - 60;
-    console.log("Width :- " + width);
-    console.log("height :- " + height);
-
+    let width = mainRef.current.getBoundingClientRect().width - 20;
+    let height = mainRef.current.getBoundingClientRect().height - 20;
     d3.select("#box").remove();
     let box = d3
       .select("#main")
@@ -30,29 +29,18 @@ const Main = () => {
     d3.selectAll(".bar").remove();
     let svg = AppState.svg.box;
     let bars = AppState.bars;
-    bars.forEach((bar, index) => {
-      // if (index % 2 === 0) {
+    bars.forEach((bar) => {
       svg
         .append("rect")
         .attr("class", "bar")
-        .attr("x", bar.width * index + 2 * index)
-        .attr("y", 0)
-        .attr("width", bar.width)
-        .attr("height", bar.height)
-        .attr("fill", "#00214d");
-      // } else {
-      //   svg
-      //     .append("rect")
-      //     .attr("class", "bar")
-      //     .attr("x", bar.width * index + 2 * index)
-      //     .attr("y", 0)
-      //     .attr("width", bar.width)
-      //     .attr("height", bar.height)
-      //     .attr("fill", "#ffd803");
-      // }
+        .attr("x", bar.getX())
+        .attr("y", bar.getY())
+        .attr("width", bar.getWidth())
+        .attr("height", bar.getHeight())
+        .attr("fill", bar.getColor());
     });
   }, [AppState.bars]);
-  return <main id="main" className="main"></main>;
+  return <main ref={mainRef} id="main" className="main"></main>;
 };
 
 export default Main;

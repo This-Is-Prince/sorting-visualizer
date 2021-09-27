@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import "./App.css";
 import Reducer from "./app/Reducer";
 import AppInitialState, { AppStateType } from "./app/State";
-import Footer from "./components/Footer";
+import Aside from "./components/Aside";
 import Main from "./components/Main";
 import AppContext from "./app/AppContext";
 import Modal from "./components/modal/Modal";
@@ -24,10 +24,10 @@ const App = () => {
   }, []);
   return (
     <AppContext.Provider value={{ AppState, dispatch }}>
-      <Main />
-      <Footer />
-      <Modal />
       {AppState.isFullScreen && <FullScreenModal />}
+      <Aside />
+      <Main />
+      <Modal />
     </AppContext.Provider>
   );
 };

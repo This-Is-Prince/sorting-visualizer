@@ -1,3 +1,50 @@
+export class Bar {
+  constructor(
+    private width: number,
+    private height: number,
+    private id: string,
+    private color: string,
+    private y: number,
+    private x: number
+  ) {}
+  getWidth() {
+    return this.width;
+  }
+  setWidth(value: number) {
+    this.width = value;
+  }
+  getHeight() {
+    return this.height;
+  }
+  setHeight(value: number) {
+    this.height = value;
+  }
+  getColor() {
+    return this.color;
+  }
+  setColor(value: string) {
+    this.color = value;
+  }
+  getId() {
+    return this.id;
+  }
+  setId(value: string) {
+    this.id = value;
+  }
+  getX() {
+    return this.x;
+  }
+  setX(value: number) {
+    this.x = value;
+  }
+  getY() {
+    return this.y;
+  }
+  setY(value: number) {
+    this.y = value;
+  }
+}
+
 export type ModalOpenPayloadType = { for: string; id: number };
 export interface AppStateType {
   isPlay: boolean;
@@ -7,7 +54,7 @@ export interface AppStateType {
   speed: "slow" | "fast" | "normal";
   isBannerOpen: boolean;
   size: number;
-  bars: any[];
+  bars: Bar[];
   svg: {
     box: any;
     width: number;
@@ -24,7 +71,7 @@ const AppInitialState: AppStateType = {
   isBannerOpen: false,
   size: 10,
   bars: [],
-  svg: { box: undefined, height: window.innerHeight, width: window.innerWidth },
+  svg: { box: undefined, height: 0, width: 0 },
   isFullScreen: true,
 };
 export default AppInitialState;
