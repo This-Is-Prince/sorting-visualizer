@@ -16,6 +16,7 @@ const Algorithm = () => {
           type="radio"
           aria-label="bubble"
           name="algorithm"
+          checked={AppState.whichAlgorithm === "bubble"}
           value="bubble"
           className="radio flex-center"
           onChange={handleOnChange}
@@ -27,6 +28,7 @@ const Algorithm = () => {
           type="radio"
           aria-label="merge"
           name="algorithm"
+          checked={AppState.whichAlgorithm === "merge"}
           value="merge"
           className="radio flex-center"
           onChange={handleOnChange}
@@ -38,6 +40,7 @@ const Algorithm = () => {
           type="radio"
           aria-label="heap"
           name="algorithm"
+          checked={AppState.whichAlgorithm === "heap"}
           value="heap"
           className="radio flex-center"
           onChange={handleOnChange}
@@ -49,6 +52,7 @@ const Algorithm = () => {
           type="radio"
           aria-label="quick"
           name="algorithm"
+          checked={AppState.whichAlgorithm === "quick"}
           value="quick"
           className="radio flex-center"
           onChange={handleOnChange}

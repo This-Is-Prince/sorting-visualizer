@@ -15,6 +15,18 @@ let swap = (arr: ArrType[], currIndex: number, speed: number) => {
     window.dispatchEvent(swapEvent);
     return;
   }
+  if (currIndex != 0) {
+    let first = arr[currIndex - 1].first;
+    let second = arr[currIndex - 1].second;
+    d3.select(`#${first.getId()}`)
+      .transition()
+      .duration(speed)
+      .attr("fill", first.getColor());
+    d3.select(`#${second.getId()}`)
+      .transition()
+      .duration(speed)
+      .attr("fill", second.getColor());
+  }
   let first = arr[currIndex].first;
   let second = arr[currIndex].second;
   let firstX = second.getX();
@@ -24,10 +36,12 @@ let swap = (arr: ArrType[], currIndex: number, speed: number) => {
   d3.select(`#${first.getId()}`)
     .transition()
     .duration(speed)
+    .attr("fill", "#ffd803")
     .attr("x", first.getX());
   d3.select(`#${second.getId()}`)
     .transition()
     .duration(speed)
+    .attr("fill", "#ffd803")
     .attr("x", second.getX())
     .on("end", () => {
       isSwap = true;

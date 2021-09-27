@@ -18,7 +18,7 @@ const Speed = () => {
           name="speed"
           checked={AppState.speed === "SLOW"}
           onChange={handleOnChange}
-          value="slow"
+          value="SLOW"
           className="radio flex-center"
         />
         <p className="flex-center">
@@ -35,7 +35,7 @@ const Speed = () => {
           name="speed"
           checked={AppState.speed === "NORMAL"}
           onChange={handleOnChange}
-          value="normal"
+          value="NORMAL"
           className="radio flex-center"
         />
         <p className="flex-center">
@@ -50,9 +50,9 @@ const Speed = () => {
           type="radio"
           aria-label="fast"
           name="speed"
-          checked={AppState.speed === "SLOW"}
+          checked={AppState.speed === "FAST"}
           onChange={handleOnChange}
-          value="fast"
+          value="FAST"
           className="radio flex-center"
         />
         <p className="flex-center">

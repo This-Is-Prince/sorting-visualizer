@@ -42,7 +42,9 @@ const Aside = () => {
       });
       return;
     }
-    sortBars = Sort(AppState.whichAlgorithm, 0, AppState.bars);
+    let speed =
+      AppState.speed === "FAST" ? 0 : AppState.speed === "NORMAL" ? 500 : 1000;
+    sortBars = Sort(AppState.whichAlgorithm, speed, AppState.bars);
     dispatch({
       type: "PLAY",
     });

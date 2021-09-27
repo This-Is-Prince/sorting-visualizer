@@ -97,13 +97,15 @@ GLOBAL CSS END
   align-items: center;
   justify-content: center;
 }
+.main svg {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
 .aside {
   position: relative;
   width: var(--width);
   display: flex;
   align-items: center;
   flex-direction: column;
-  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.25);
   background-image: url("./images/aside.svg");
   background-repeat: no-repeat;
   background-size: cover;
