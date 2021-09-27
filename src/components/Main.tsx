@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
 
@@ -8,6 +8,11 @@ const Main = () => {
   const resize = () => {
     let width = mainRef.current.getBoundingClientRect().width - 20;
     let height = mainRef.current.getBoundingClientRect().height - 20;
+    d3.selectAll(".bar").remove();
+    dispatch({
+      type: "ADD_BARS",
+      payload: [],
+    });
     d3.select("#box").remove();
     let box = d3
       .select("#main")
@@ -26,10 +31,8 @@ const Main = () => {
   }, []);
   useEffect(() => {
     d3.selectAll(".bar").remove();
-    let svg = AppState.svg.box;
-    let bars = AppState.bars;
-    bars.forEach((bar) => {
-      svg
+    AppState.bars.forEach((bar) => {
+      AppState.svg.box
         .append("rect")
         .attr("class", "bar")
         .attr("id", bar.getId())

@@ -43,7 +43,7 @@ const Aside = () => {
       return;
     }
     let speed =
-      AppState.speed === "FAST" ? 0 : AppState.speed === "NORMAL" ? 500 : 1000;
+      AppState.speed === "FAST" ? 0 : AppState.speed === "NORMAL" ? 250 : 500;
     sortBars = Sort(AppState.whichAlgorithm, speed, AppState.bars);
     dispatch({
       type: "PLAY",
