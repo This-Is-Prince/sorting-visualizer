@@ -51,6 +51,14 @@ const Aside = () => {
         className="flex-center btn"
         aria-label="play/pause"
         onClick={() => {
+          d3.select("#bar-1")
+            .transition()
+            .delay(1000)
+            .duration(2000)
+            .attr("x", 100)
+            .on("end", () => {
+              console.log("hello");
+            });
           dispatch({
             type: "PLAY",
           });

@@ -1,8 +1,6 @@
 import React from "react";
 import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 
-import gsap from "gsap";
-
 export type ActionType =
   | { type: "PLAY" }
   | { type: "ADD_ALGORITHM"; payload: string }
@@ -85,14 +83,12 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     };
   }
   if (action.type === "CLOSE_MODAL") {
-    gsap.fromTo(".modal__container", { x: "0", duration: 3 }, { x: "-100%" });
     return {
       ...state,
       isModalOpen: false,
     };
   }
   if (action.type === "OPEN_MODAL") {
-    gsap.fromTo(".modal__container", { x: "-100%", duration: 3 }, { x: "0" });
     return {
       ...state,
       isModalOpen: true,

@@ -86,7 +86,7 @@ GLOBAL CSS END
   display: grid;
   grid-template-columns: auto auto;
 }
-svg {
+#box {
   transform: scaleY(-1);
 }
 .main {
@@ -145,6 +145,12 @@ svg {
   position: absolute;
   inset: 0;
   z-index: var(--modal-z-index);
+  transition: transform 0.3s linear;
+}
+.open--modal {
+  transform: translateX(0);
+}
+.close--modal {
   transform: translateX(-100%);
 }
 .modal {

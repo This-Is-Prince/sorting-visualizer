@@ -9,7 +9,11 @@ const Modal = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const id = AppState.modalState.id;
   return (
-    <div className="modal__container flex-center">
+    <div
+      className={`modal__container flex-center ${
+        AppState.isModalOpen ? "open--modal" : "close--modal"
+      }`}
+    >
       <section className="modal">
         <header className="flex-center modal__header ">
           <h2>{AppState.modalState.for}</h2>

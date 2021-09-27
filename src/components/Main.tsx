@@ -4,7 +4,6 @@ import * as d3 from "d3";
 
 const Main = () => {
   const mainRef = useRef<HTMLElement>({} as HTMLElement);
-
   const { AppState, dispatch } = useContext(AppContext);
   const resize = () => {
     let width = mainRef.current.getBoundingClientRect().width - 20;
@@ -33,6 +32,7 @@ const Main = () => {
       svg
         .append("rect")
         .attr("class", "bar")
+        .attr("id", bar.getId())
         .attr("x", bar.getX())
         .attr("y", bar.getY())
         .attr("width", bar.getWidth())
