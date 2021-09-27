@@ -6,7 +6,7 @@ import AppContext from "../../app/AppContext";
 const Speed = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value as "slow" | "fast" | "normal";
+    const value = e.currentTarget.value as "SLOW" | "FAST" | "NORMAL";
     dispatch({ type: "ADD_SPEED", payload: value });
   };
   return (
@@ -16,7 +16,7 @@ const Speed = () => {
           type="radio"
           aria-label="slow"
           name="speed"
-          checked={AppState.speed === "slow"}
+          checked={AppState.speed === "SLOW"}
           onChange={handleOnChange}
           value="slow"
           className="radio flex-center"
@@ -33,7 +33,7 @@ const Speed = () => {
           type="radio"
           aria-label="normal"
           name="speed"
-          checked={AppState.speed === "normal"}
+          checked={AppState.speed === "NORMAL"}
           onChange={handleOnChange}
           value="normal"
           className="radio flex-center"
@@ -50,7 +50,7 @@ const Speed = () => {
           type="radio"
           aria-label="fast"
           name="speed"
-          checked={AppState.speed === "fast"}
+          checked={AppState.speed === "SLOW"}
           onChange={handleOnChange}
           value="fast"
           className="radio flex-center"

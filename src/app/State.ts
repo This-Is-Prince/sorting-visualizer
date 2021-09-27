@@ -5,8 +5,15 @@ export class Bar {
     private id: string,
     private color: string,
     private y: number,
-    private x: number
+    private x: number,
+    private index: number
   ) {}
+  getIndex() {
+    return this.index;
+  }
+  setIndex(value: number) {
+    this.index = value;
+  }
   getWidth() {
     return this.width;
   }
@@ -51,8 +58,10 @@ export interface AppStateType {
   isModalOpen: boolean;
   modalState: ModalOpenPayloadType;
   whichAlgorithm: string;
-  speed: "slow" | "fast" | "normal";
+  speed: "SLOW" | "FAST" | "NORMAL";
   isBannerOpen: boolean;
+  isAlgoBannerOpen: boolean;
+  isSizeBannerOpen: boolean;
   size: number;
   bars: Bar[];
   svg: {
@@ -67,8 +76,10 @@ const AppInitialState: AppStateType = {
   isModalOpen: false,
   modalState: { for: "", id: 1 },
   whichAlgorithm: "",
-  speed: "normal",
+  speed: "NORMAL",
   isBannerOpen: false,
+  isAlgoBannerOpen: false,
+  isSizeBannerOpen: false,
   size: 10,
   bars: [],
   svg: { box: undefined, height: 0, width: 0 },

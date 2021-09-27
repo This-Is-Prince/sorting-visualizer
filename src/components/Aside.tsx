@@ -3,10 +3,28 @@ import { IoMdSpeedometer } from "react-icons/io";
 import { VscSymbolArray } from "react-icons/vsc";
 import { FaPauseCircle, FaPlayCircle, FaSitemap } from "react-icons/fa";
 import AppContext from "../app/AppContext";
-import * as d3 from "d3";
+import Sort from "../algorithm/sort";
 
 const Aside = () => {
   const { AppState, dispatch } = useContext(AppContext);
+  const handlePlay = () => {
+    if (AppState.whichAlgorithm === "") {
+      dispatch({
+        type: "SELECT_ALGORITHM",
+      });
+      return;
+    }
+    if (AppState.bars.length === 0) {
+      dispatch({
+        type: "SELECT_ARRAY",
+      });
+      return;
+    }
+    Sort(AppState.whichAlgorithm, 0, AppState.bars);
+    dispatch({
+      type: "PLAY",
+    });
+  };
   return (
     <aside className="aside">
       <button
@@ -22,7 +40,9 @@ const Aside = () => {
         <IoMdSpeedometer />
       </button>
       <button
-        className="flex-center btn"
+        className={`flex-center btn ${
+          AppState.isSizeBannerOpen ? "banner-open" : ""
+        }`}
         aria-label="size"
         onClick={() => {
           dispatch({
@@ -35,7 +55,7 @@ const Aside = () => {
       </button>
       <button
         className={`${
-          AppState.isBannerOpen ? "banner-open" : ""
+          AppState.isAlgoBannerOpen ? "banner-open" : ""
         } flex-center btn algo`}
         aria-label="algorithm"
         onClick={() => {
@@ -50,19 +70,7 @@ const Aside = () => {
       <button
         className="flex-center btn"
         aria-label="play/pause"
-        onClick={() => {
-          d3.select("#bar-1")
-            .transition()
-            .delay(1000)
-            .duration(2000)
-            .attr("x", 100)
-            .on("end", () => {
-              console.log("hello");
-            });
-          dispatch({
-            type: "PLAY",
-          });
-        }}
+        onClick={handlePlay}
       >
         {AppState.isPlay ? <FaPauseCircle /> : <FaPlayCircle />}
       </button>

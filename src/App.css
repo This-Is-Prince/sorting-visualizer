@@ -127,17 +127,28 @@ GLOBAL CSS END
 .algo {
   position: relative;
 }
-.banner-open.algo {
-  display: flex;
-}
-.banner-open.algo:hover {
-  background-color: var(--clr-sec);
-  color: var(--clr-text);
-}
 
 .banner-open {
-  transform: scale(1);
   background-color: var(--clr-sec);
+  color: var(--clr-ter);
+  /* border: 0.1rem solid var(--clr-text); */
+  animation-name: bannerAnimation;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+.banner-open:hover {
+  background-color: var(--clr-sec);
+  color: var(--clr-ter);
+}
+@keyframes bannerAnimation {
+  from {
+    transform: scale(0.75);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 .modal__container {
   width: 100vw;
@@ -163,6 +174,7 @@ GLOBAL CSS END
   background-image: url("./images/wave.svg");
   color: var(--clr-ter);
   border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
 }
 .modal__header {
   color: var(--clr-text);

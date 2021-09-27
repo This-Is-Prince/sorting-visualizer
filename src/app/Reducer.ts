@@ -3,9 +3,11 @@ import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 
 export type ActionType =
   | { type: "PLAY" }
+  | { type: "SELECT_ALGORITHM" }
+  | { type: "SELECT_ARRAY" }
   | { type: "ADD_ALGORITHM"; payload: string }
   | { type: "ADD_SIZE"; payload: number }
-  | { type: "ADD_SPEED"; payload: "slow" | "fast" | "normal" }
+  | { type: "ADD_SPEED"; payload: "SLOW" | "FAST" | "NORMAL" }
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" }
   | { type: "ADD_BARS"; payload: any[] }
@@ -47,7 +49,8 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
         `bar-${i}`,
         "#00214d",
         0,
-        ratio * i + 2 * i
+        ratio * i + 2 * i,
+        i
       );
       bars.push(bar);
     }
@@ -55,13 +58,14 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       ...state,
       size,
       bars,
+      isSizeBannerOpen: false,
     };
   }
   if (action.type === "ADD_ALGORITHM") {
     return {
       ...state,
       whichAlgorithm: action.payload,
-      isBannerOpen: false,
+      isAlgoBannerOpen: false,
     };
   }
   if (action.type === "ADD_SPEED") {
@@ -70,13 +74,19 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       speed: action.payload,
     };
   }
+  if (action.type === "SELECT_ALGORITHM") {
+    return {
+      ...state,
+      isAlgoBannerOpen: true,
+    };
+  }
+  if (action.type === "SELECT_ARRAY") {
+    return {
+      ...state,
+      isSizeBannerOpen: true,
+    };
+  }
   if (action.type === "PLAY") {
-    if (state.whichAlgorithm === "") {
-      return {
-        ...state,
-        isBannerOpen: true,
-      };
-    }
     return {
       ...state,
       isPlay: !state.isPlay,
