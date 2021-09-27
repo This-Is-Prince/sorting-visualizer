@@ -10,7 +10,7 @@ const Algorithm = () => {
     });
   };
   return (
-    <article className="modal__content">
+    <article className="modal__content flex-center">
       <div className="choose">
         <input
           type="radio"

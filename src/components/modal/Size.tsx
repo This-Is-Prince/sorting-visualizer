@@ -12,7 +12,7 @@ const Size = () => {
     });
   };
   return (
-    <article className="modal__content">
+    <article className="modal__content flex-center">
       <div className="flex-center range-container">
         <output className="bubble flex-center">{AppState.size}</output>
         <input

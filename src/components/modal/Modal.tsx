@@ -15,7 +15,7 @@ const Modal = () => {
       }`}
     >
       <section className="modal">
-        <header className="flex-center modal__header ">
+        <header className="modal__header ">
           <h2>{AppState.modalState.for}</h2>
           <button
             className="btn flex-center"
