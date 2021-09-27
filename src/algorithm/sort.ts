@@ -1,18 +1,18 @@
 import { Bar } from "../app/State";
 import * as d3 from "d3";
 import bubbleSort from "./bubble";
-
+const swapEvent = new Event("swap-done");
 interface ArrType {
   first: Bar;
   second: Bar;
 }
+
 export let intervalID: any;
 let isSwap = false;
 let swap = (arr: ArrType[], currIndex: number, speed: number) => {
-  console.log(intervalID);
   if (currIndex >= arr.length) {
     clearInterval(intervalID);
-    console.log(intervalID);
+    window.dispatchEvent(swapEvent);
     return;
   }
   let first = arr[currIndex].first;
@@ -34,7 +34,7 @@ let swap = (arr: ArrType[], currIndex: number, speed: number) => {
     });
 };
 const Sort = (algo: string, speed: number, bars: Bar[]) => {
-  let arr = bubbleSort(bars);
+  let { bars: sortBars, sortArr: arr } = bubbleSort(bars);
   isSwap = true;
   let index = -1;
   intervalID = setInterval(() => {
@@ -44,6 +44,7 @@ const Sort = (algo: string, speed: number, bars: Bar[]) => {
       index++;
     }
   }, 0);
+  return sortBars;
 };
 
 export default Sort;

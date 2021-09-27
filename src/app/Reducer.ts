@@ -10,7 +10,7 @@ export type ActionType =
   | { type: "ADD_SPEED"; payload: "SLOW" | "FAST" | "NORMAL" }
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" }
-  | { type: "ADD_BARS"; payload: any[] }
+  | { type: "ADD_BARS"; payload: Bar[] }
   | { type: "CHANGE_SCREEN" }
   | { type: "ADD_SVG"; payload: any };
 
@@ -35,6 +35,7 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       bars: action.payload,
     };
   }
+
   if (action.type === "ADD_SIZE") {
     let bars: Bar[] = [];
     let size = action.payload;

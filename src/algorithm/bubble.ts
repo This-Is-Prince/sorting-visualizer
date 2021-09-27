@@ -24,7 +24,7 @@ const bubbleSort = (barsArr: Bar[]) => {
   }
   console.log(bars);
 
-  return sortArr;
+  return { sortArr, bars };
 };
 
 export default bubbleSort;
