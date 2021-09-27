@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import AppContext from "../../app/AppContext";
-import * as d3 from "d3";
-
 const Size = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = parseInt(e.currentTarget.value);
     dispatch({
       type: "ADD_SIZE",
-      payload: value,
+      payload: parseInt(e.currentTarget.value),
     });
   };
   return (

@@ -21,7 +21,7 @@ const Algorithm = () => {
           className="radio flex-center"
           onChange={handleOnChange}
         />
-        <p className="flex-center">Bubble sort</p>
+        <p>Bubble sort</p>
       </div>
       <div className="choose">
         <input
@@ -33,7 +33,7 @@ const Algorithm = () => {
           className="radio flex-center"
           onChange={handleOnChange}
         />
-        <p className="flex-center">merge sort</p>
+        <p>merge sort</p>
       </div>
       <div className="choose">
         <input
@@ -45,7 +45,7 @@ const Algorithm = () => {
           className="radio flex-center"
           onChange={handleOnChange}
         />
-        <p className="flex-center">heap sort</p>
+        <p>heap sort</p>
       </div>
       <div className="choose">
         <input
@@ -57,7 +57,7 @@ const Algorithm = () => {
           className="radio flex-center"
           onChange={handleOnChange}
         />
-        <p className="flex-center">quick sort</p>
+        <p>quick sort</p>
       </div>
     </article>
   );

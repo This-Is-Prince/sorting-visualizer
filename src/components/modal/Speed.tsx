@@ -6,8 +6,10 @@ import AppContext from "../../app/AppContext";
 const Speed = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value as "SLOW" | "FAST" | "NORMAL";
-    dispatch({ type: "ADD_SPEED", payload: value });
+    dispatch({
+      type: "ADD_SPEED",
+      payload: e.currentTarget.value as "SLOW" | "FAST" | "NORMAL",
+    });
   };
   return (
     <article className="modal__content flex-center">
