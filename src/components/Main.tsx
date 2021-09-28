@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
 import { SwapObjType } from "../algorithm/quick";
@@ -115,7 +115,7 @@ const Main = () => {
     sortedArrRef.current = sortedArr;
     swapObjArrRef.current = swapObjArr;
     indexRef.current = -1;
-  }, [AppState.barsArray]);
+  }, [AppState.barsArray, AppState.whichAlgorithm]);
   useEffect(() => {
     if (AppState.isPlay) {
       animateSortRef.current = () => {
