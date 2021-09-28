@@ -136,19 +136,6 @@ GLOBAL CSS END
   position: relative;
 }
 
-.banner-open {
-  background-color: var(--clr-sec);
-  color: var(--clr-ter);
-  animation: bannerAnimation 0.5s ease-in-out infinite alternate;
-}
-@keyframes bannerAnimation {
-  from {
-    transform: scale(0.75);
-  }
-  to {
-    transform: scale(1);
-  }
-}
 .modal__container {
   width: 100vw;
   height: 100vh;

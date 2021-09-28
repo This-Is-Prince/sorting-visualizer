@@ -15,17 +15,30 @@ const Aside = () => {
   };
   const { AppState, dispatch } = useContext(AppContext);
   const handlePlay = (event: React.MouseEvent) => {
-    if (
-      !checkEvent(event) ||
-      AppState.whichAlgorithm === "" ||
-      AppState.bars.length === 0
-    )
+    if (!checkEvent(event)) return;
+    if (AppState.whichAlgorithm === "") {
+      dispatch({
+        type: "OPEN_MODAL",
+        payload: { for: "choose algorithm", id: 3 },
+      });
       return;
-
+    }
+    if (AppState.bars.length === 0) {
+      dispatch({
+        type: "OPEN_MODAL",
+        payload: { for: "change array", id: 2 },
+      });
+      return;
+    }
     if (!AppState.isSortDone) {
       dispatch({
         type: "PLAY",
         payload: true,
+      });
+    } else {
+      dispatch({
+        type: "OPEN_MODAL",
+        payload: { for: "change array", id: 2 },
       });
     }
   };
@@ -46,15 +59,13 @@ const Aside = () => {
         <IoMdSpeedometer />
       </button>
       <button
-        className={`flex-center btn ${
-          AppState.bars.length === 0 ? "banner-open" : ""
-        }`}
-        aria-label="size"
+        className={`flex-center btn`}
+        aria-label="array"
         onClick={(event) => {
           if (checkEvent(event)) {
             dispatch({
               type: "OPEN_MODAL",
-              payload: { for: "change size", id: 2 },
+              payload: { for: "change array", id: 2 },
             });
           }
         }}
@@ -62,9 +73,7 @@ const Aside = () => {
         <VscSymbolArray />
       </button>
       <button
-        className={`${
-          AppState.whichAlgorithm === "" ? "banner-open" : ""
-        } flex-center btn algo`}
+        className={`flex-center btn algo`}
         aria-label="algorithm"
         onClick={(event) => {
           if (checkEvent(event)) {

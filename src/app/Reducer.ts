@@ -1,4 +1,3 @@
-import React from "react";
 import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 
 export type ActionType =
