@@ -3,11 +3,9 @@ import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 
 export type ActionType =
   | { type: "PLAY"; payload: boolean }
-  | { type: "SELECT_ALGORITHM" }
-  | { type: "SELECT_ARRAY" }
   | { type: "SORT_DONE" }
   | { type: "ADD_ALGORITHM"; payload: string }
-  | { type: "ADD_SIZE"; payload: number }
+  | { type: "ADD_ARRAY"; payload: Bar[] }
   | { type: "ADD_SPEED"; payload: number }
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" }
@@ -37,9 +35,6 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       isPlay: false,
       isModalOpen: false,
       isSortDone: false,
-      isAlgoBannerOpen: false,
-      isSizeBannerOpen: false,
-      size: 10,
       bars: [],
       svg: action.payload,
     };
@@ -51,38 +46,17 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     };
   }
 
-  if (action.type === "ADD_SIZE") {
-    let bars: Bar[] = [];
-    let size = action.payload;
-    let width = state.svg.width;
-    let height = state.svg.height;
-    let ratio = (width - size * 2) / size;
-
-    for (let i = 0; i < size; i++) {
-      let bar = new Bar(
-        ratio,
-        Math.floor(Math.random() * height),
-        `bar-${i}`,
-        "#00214d",
-        0,
-        ratio * i + 2 * i,
-        i
-      );
-      bars.push(bar);
-    }
+  if (action.type === "ADD_ARRAY") {
     return {
       ...state,
-      size,
-      bars,
+      bars: action.payload,
       isSortDone: false,
-      isSizeBannerOpen: false,
     };
   }
   if (action.type === "ADD_ALGORITHM") {
     return {
       ...state,
       whichAlgorithm: action.payload,
-      isAlgoBannerOpen: false,
     };
   }
   if (action.type === "ADD_SPEED") {
@@ -91,18 +65,7 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       speed: action.payload,
     };
   }
-  if (action.type === "SELECT_ALGORITHM") {
-    return {
-      ...state,
-      isAlgoBannerOpen: true,
-    };
-  }
-  if (action.type === "SELECT_ARRAY") {
-    return {
-      ...state,
-      isSizeBannerOpen: true,
-    };
-  }
+
   if (action.type === "PLAY") {
     return {
       ...state,

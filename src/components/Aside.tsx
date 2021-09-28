@@ -37,30 +37,19 @@ const Aside = () => {
     };
   }, []);
   const handlePlay = (event: React.MouseEvent) => {
-    if (!checkEvent(event)) return;
+    if (
+      !checkEvent(event) ||
+      AppState.whichAlgorithm === "" ||
+      AppState.bars.length === 0
+    )
+      return;
 
-    if (AppState.whichAlgorithm === "") {
-      dispatch({
-        type: "SELECT_ALGORITHM",
-      });
-      return;
-    }
-    if (AppState.bars.length === 0) {
-      dispatch({
-        type: "SELECT_ARRAY",
-      });
-      return;
-    }
     if (!AppState.isSortDone) {
       sortBars = [];
       sortBars = Sort(AppState.whichAlgorithm, AppState.speed, AppState.bars);
       dispatch({
         type: "PLAY",
         payload: true,
-      });
-    } else {
-      dispatch({
-        type: "SELECT_ARRAY",
       });
     }
   };
@@ -82,7 +71,7 @@ const Aside = () => {
       </button>
       <button
         className={`flex-center btn ${
-          AppState.isSizeBannerOpen ? "banner-open" : ""
+          AppState.bars.length === 0 ? "banner-open" : ""
         }`}
         aria-label="size"
         onClick={(event) => {
@@ -98,7 +87,7 @@ const Aside = () => {
       </button>
       <button
         className={`${
-          AppState.isAlgoBannerOpen ? "banner-open" : ""
+          AppState.whichAlgorithm === "" ? "banner-open" : ""
         } flex-center btn algo`}
         aria-label="algorithm"
         onClick={(event) => {

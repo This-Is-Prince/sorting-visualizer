@@ -60,9 +60,6 @@ export interface AppStateType {
   whichAlgorithm: string;
   speed: number;
   isSortDone: boolean;
-  isAlgoBannerOpen: boolean;
-  isSizeBannerOpen: boolean;
-  size: number;
   bars: Bar[];
   svg: {
     box: any;
@@ -78,9 +75,6 @@ const AppInitialState: AppStateType = {
   whichAlgorithm: "",
   speed: 750,
   isSortDone: false,
-  isAlgoBannerOpen: false,
-  isSizeBannerOpen: false,
-  size: 10,
   bars: [],
   svg: { box: undefined, height: 0, width: 0 },
   isFullScreen: false,

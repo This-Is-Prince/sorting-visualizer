@@ -35,14 +35,14 @@ let swap = (arr: ArrType[], currIndex: number, speed: number) => {
   first.setX(firstX);
   second.setX(secondX);
   d3.select(`#${first.getId()}`)
-    .attr("fill", "#ffd803")
     .transition()
     .duration(speed)
+    .attr("fill", "#ffd803")
     .attr("x", first.getX());
   d3.select(`#${second.getId()}`)
-    .attr("fill", "#ffd803")
     .transition()
     .duration(speed)
+    .attr("fill", "#ffd803")
     .attr("x", second.getX())
     .on("end", () => {
       isSwap = true;

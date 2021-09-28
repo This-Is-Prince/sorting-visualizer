@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FaTimesCircle } from "react-icons/fa";
 import AppContext from "../../app/AppContext";
 import Algorithm from "./Algorithm";
-import Size from "./Size";
+import Size from "./Array";
 import Speed from "./Speed";
 
 const Modal = () => {
