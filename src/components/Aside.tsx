@@ -3,9 +3,7 @@ import { IoMdSpeedometer } from "react-icons/io";
 import { VscSymbolArray } from "react-icons/vsc";
 import { FaPauseCircle, FaPlayCircle, FaSitemap } from "react-icons/fa";
 import AppContext from "../app/AppContext";
-import Sort from "../algorithm/sort";
 import { Bar } from "../app/State";
-let sortBars: Bar[];
 
 const Aside = () => {
   const checkEvent = (event: React.MouseEvent) => {
@@ -25,10 +23,6 @@ const Aside = () => {
     dispatch({
       type: "SORT_DONE",
     });
-    dispatch({
-      type: "ADD_BARS",
-      payload: sortBars,
-    });
   };
   useEffect(() => {
     window.addEventListener("swap-done", swapDone);
@@ -45,8 +39,6 @@ const Aside = () => {
       return;
 
     if (!AppState.isSortDone) {
-      sortBars = [];
-      sortBars = Sort(AppState.whichAlgorithm, AppState.speed, AppState.bars);
       dispatch({
         type: "PLAY",
         payload: true,
