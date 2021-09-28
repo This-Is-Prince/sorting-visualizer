@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
-import quickSort from "../algorithm/quick";
+import quickSort, { SwapObjType } from "../algorithm/quick";
 import { Bar } from "../app/State";
 
 interface ArrType {
@@ -13,21 +13,25 @@ const Main = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const mainRef = useRef<HTMLElement>({} as HTMLElement);
   const animationRef = useRef(0);
-  const sortArrRef = useRef([] as Bar[]);
-  const arrRef = useRef([] as { first: Bar; second: Bar }[]);
+  const sortedArrRef = useRef([] as Bar[]);
+  const swapObjArrRef = useRef([] as SwapObjType[]);
   const indexRef = useRef(-1);
 
-  let swap = (arr: ArrType[], currIndex: number, speed: number) => {
-    if (currIndex >= arr.length) {
+  let swap = (swapObjArr: ArrType[], currIndex: number, speed: number) => {
+    if (currIndex >= swapObjArr.length) {
       dispatch({
         type: "ADD_BARS",
-        payload: sortArrRef.current,
+        payload: sortedArrRef.current,
       });
+      dispatch({
+        type: "SORT_DONE",
+      });
+      cancelAnimationFrame(animationRef.current);
       return;
     }
     if (currIndex != 0) {
-      let first = arr[currIndex - 1].first;
-      let second = arr[currIndex - 1].second;
+      let first = swapObjArr[currIndex - 1].first;
+      let second = swapObjArr[currIndex - 1].second;
       d3.select(`#${first.getId()}`)
         .transition()
         .duration(speed)
@@ -37,8 +41,8 @@ const Main = () => {
         .duration(speed)
         .attr("fill", second.getColor());
     }
-    let first = arr[currIndex].first;
-    let second = arr[currIndex].second;
+    let first = swapObjArr[currIndex].first;
+    let second = swapObjArr[currIndex].second;
     let firstX = second.getX();
     let secondX = first.getX();
     first.setX(firstX);
@@ -59,19 +63,22 @@ const Main = () => {
   };
   const animateSort = () => {
     console.log("animationSort");
-    swap(arrRef.current, indexRef.current + 1, AppState.speed);
+    swap(swapObjArrRef.current, indexRef.current + 1, AppState.speed);
     indexRef.current++;
   };
   useEffect(() => {
     if (AppState.isPlay) {
-      const { bars: sortBars, sortArr: arr } = quickSort(AppState.bars);
-      sortArrRef.current = sortBars;
-      arrRef.current = arr;
+      const { swapObjArr, sortedArr } = quickSort(AppState.bars);
+      sortedArrRef.current = sortedArr;
+      swapObjArrRef.current = swapObjArr;
       indexRef.current = -1;
       animationRef.current = requestAnimationFrame(animateSort);
+      return () => {
+        cancelAnimationFrame(animationRef.current);
+      };
     }
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      console.log(`return when appState.isPlay ->${AppState.isPlay} `);
     };
   }, [AppState.isPlay]);
 

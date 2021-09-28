@@ -3,7 +3,6 @@ import { IoMdSpeedometer } from "react-icons/io";
 import { VscSymbolArray } from "react-icons/vsc";
 import { FaPauseCircle, FaPlayCircle, FaSitemap } from "react-icons/fa";
 import AppContext from "../app/AppContext";
-import { Bar } from "../app/State";
 
 const Aside = () => {
   const checkEvent = (event: React.MouseEvent) => {
@@ -15,21 +14,6 @@ const Aside = () => {
     return true;
   };
   const { AppState, dispatch } = useContext(AppContext);
-  const swapDone = () => {
-    dispatch({
-      type: "PLAY",
-      payload: false,
-    });
-    dispatch({
-      type: "SORT_DONE",
-    });
-  };
-  useEffect(() => {
-    window.addEventListener("swap-done", swapDone);
-    return () => {
-      window.removeEventListener("swap-done", swapDone);
-    };
-  }, []);
   const handlePlay = (event: React.MouseEvent) => {
     if (
       !checkEvent(event) ||
