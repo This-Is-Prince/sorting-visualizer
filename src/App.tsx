@@ -24,10 +24,15 @@ const App = () => {
   }, []);
   return (
     <AppContext.Provider value={{ AppState, dispatch }}>
-      {AppState.isFullScreen || <FullScreenModal />}
-      <Aside />
-      <Main />
-      <Modal />
+      {AppState.isFullScreen ? (
+        <>
+          <Aside />
+          <Main />
+          <Modal />
+        </>
+      ) : (
+        <FullScreenModal />
+      )}
     </AppContext.Provider>
   );
 };

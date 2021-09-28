@@ -34,6 +34,13 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
   if (action.type === "ADD_SVG") {
     return {
       ...state,
+      isPlay: false,
+      isModalOpen: false,
+      isSortDone: false,
+      isAlgoBannerOpen: false,
+      isSizeBannerOpen: false,
+      size: 10,
+      bars: [],
       svg: action.payload,
     };
   }

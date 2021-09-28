@@ -8,16 +8,9 @@ const Main = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const resize = () => {
     clearInterval(intervalID);
-    dispatch({
-      type: "SORT_DONE",
-    });
     let width = mainRef.current.getBoundingClientRect().width - 20;
     let height = mainRef.current.getBoundingClientRect().height - 20;
     d3.selectAll(".bar").remove();
-    dispatch({
-      type: "ADD_BARS",
-      payload: [],
-    });
     d3.select("#box").remove();
     let box = d3
       .select("#main")
