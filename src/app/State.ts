@@ -55,12 +55,14 @@ export class Bar {
 export type ModalOpenPayloadType = { for: string; id: number };
 export interface AppStateType {
   isPlay: boolean;
+  isSwapAnimationDone: boolean;
   isModalOpen: boolean;
   modalState: ModalOpenPayloadType;
   whichAlgorithm: string;
   speed: number;
   isSortDone: boolean;
-  bars: Bar[];
+  barsArray: Bar[];
+  isNewBarsAdded: boolean;
   svg: {
     box: any;
     width: number;
@@ -70,12 +72,14 @@ export interface AppStateType {
 }
 const AppInitialState: AppStateType = {
   isPlay: false,
+  isSwapAnimationDone: false,
   isModalOpen: false,
   modalState: { for: "", id: 1 },
   whichAlgorithm: "",
   speed: 750,
-  isSortDone: false,
-  bars: [],
+  isSortDone: true,
+  isNewBarsAdded: false,
+  barsArray: [],
   svg: { box: undefined, height: 0, width: 0 },
   isFullScreen: false,
 };

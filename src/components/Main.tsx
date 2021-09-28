@@ -1,8 +1,9 @@
-import { useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
-import quickSort, { SwapObjType } from "../algorithm/quick";
+import { SwapObjType } from "../algorithm/quick";
 import { Bar } from "../app/State";
+import sort from "../algorithm/sort";
 
 const Main = () => {
   const { AppState, dispatch } = useContext(AppContext);
@@ -13,14 +14,12 @@ const Main = () => {
   const indexRef = useRef(-1);
 
   let swap = (swapObjArr: SwapObjType[], currIndex: number, speed: number) => {
+    console.count("in swap");
+
     if (currIndex >= swapObjArr.length) {
-      dispatch({
-        type: "ADD_BARS",
-        payload: sortedArrRef.current,
-      });
-      dispatch({
-        type: "SORT_DONE",
-      });
+      dispatch({ type: "ADD_ARRAY", payload: sortedArrRef.current });
+      dispatch({ type: "NEW_BARS_ADDED", payload: true });
+      dispatch({ type: "SWAP_ANIMATION_DONE", payload: true });
       cancelAnimationFrame(animationRef.current);
       return;
     }
@@ -71,25 +70,37 @@ const Main = () => {
     }
   };
   const animateSort = () => {
-    console.log("animationSort");
+    console.count("animationSort");
     swap(swapObjArrRef.current, indexRef.current + 1, AppState.speed);
     indexRef.current++;
   };
   useEffect(() => {
-    if (AppState.isPlay) {
-      const { swapObjArr, sortedArr } = quickSort(AppState.bars);
+    console.count("in useEffect[AppState.isSortDone,AppState.isPlay]");
+
+    if (!AppState.isSortDone) {
+      console.count("in sort");
+
+      console.count(`when appState.isSortDone ->${AppState.isSortDone} `);
+      const { swapObjArr, sortedArr } = sort(
+        AppState.whichAlgorithm,
+        AppState.barsArray
+      );
       sortedArrRef.current = sortedArr;
       swapObjArrRef.current = swapObjArr;
       indexRef.current = -1;
       animationRef.current = requestAnimationFrame(animateSort);
+      dispatch({ type: "SORT_DONE", payload: true });
       return () => {
         cancelAnimationFrame(animationRef.current);
       };
     }
     return () => {
-      console.log(`return when appState.isPlay ->${AppState.isPlay} `);
+      console.count(`return when appState.isPlay ->${AppState.isPlay} `);
+      console.count(
+        `return when appState.isSortDone ->${AppState.isSortDone} `
+      );
     };
-  }, [AppState.isPlay]);
+  }, [AppState.isSortDone]);
 
   const resize = () => {
     let width = mainRef.current.getBoundingClientRect().width - 20;
@@ -113,7 +124,7 @@ const Main = () => {
   }, []);
   useEffect(() => {
     d3.selectAll(".bar").remove();
-    AppState.bars.forEach((bar) => {
+    AppState.barsArray.forEach((bar) => {
       AppState.svg.box
         .append("rect")
         .attr("class", "bar")
@@ -124,7 +135,7 @@ const Main = () => {
         .attr("height", bar.getHeight())
         .attr("fill", bar.getColor());
     });
-  }, [AppState.bars]);
+  }, [AppState.barsArray]);
   return <main ref={mainRef} id="main" className="main"></main>;
 };
 

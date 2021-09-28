@@ -4,7 +4,7 @@ import { Bar } from "../../app/State";
 const Size = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    let bars: Bar[] = [];
+    let barArray: Bar[] = [];
     let size = parseInt(e.currentTarget.value);
     let width = AppState.svg.width;
     let height = AppState.svg.height;
@@ -19,21 +19,22 @@ const Size = () => {
         ratio * i + 2 * i,
         i
       );
-      bars.push(bar);
+      barArray.push(bar);
     }
-    dispatch({
-      type: "ADD_ARRAY",
-      payload: bars,
-    });
+    dispatch({ type: "ADD_ARRAY", payload: barArray });
+    dispatch({ type: "NEW_BARS_ADDED", payload: true });
+    dispatch({ type: "SWAP_ANIMATION_DONE", payload: false });
   };
   return (
     <article className="modal__content flex-center">
       <div className="flex-center range-container">
-        <output className="bubble flex-center">{AppState.bars.length}</output>
+        <output className="bubble flex-center">
+          {AppState.barsArray.length}
+        </output>
         <input
           type="range"
           min="0"
-          value={AppState.bars.length}
+          value={AppState.barsArray.length}
           onChange={handleOnChange}
           max={`${
             AppState.svg.width < 776 && AppState.svg.height < 776 ? 50 : 100

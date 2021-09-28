@@ -1,28 +1,31 @@
 import { Bar } from "../app/State";
+import { SwapObjType } from "./quick";
 
-const bubbleSort = (barsArr: Bar[]) => {
-  let bars = [...barsArr];
-  let sortArr = [];
+const bubbleSort = (unSortedArr: Bar[]) => {
+  let sortedArr = [...unSortedArr];
+  let swapObjArr: SwapObjType[] = [];
   let i,
     j,
-    size = bars.length;
+    size = sortedArr.length;
   for (i = 0; i < size - 1; i++) {
     for (j = 0; j < size - i - 1; j++) {
-      if (bars[j].getHeight() > bars[j + 1].getHeight()) {
-        let first = bars[j];
-        let second = bars[j + 1];
-
-        let barObj = {
-          first,
-          second,
-        };
-        bars[j] = second;
-        bars[j + 1] = first;
-        sortArr.push(barObj);
+      let first = sortedArr[j];
+      let second = sortedArr[j + 1];
+      let barObj = {
+        first,
+        second,
+        isSwap: true,
+      };
+      if (first.getHeight() > second.getHeight()) {
+        swapObjArr.push(barObj);
+        sortedArr[j] = second;
+        sortedArr[j + 1] = first;
+      } else {
+        swapObjArr.push({ ...barObj, isSwap: false });
       }
     }
   }
-  return { sortArr, bars };
+  return { swapObjArr, sortedArr };
 };
 
 export default bubbleSort;

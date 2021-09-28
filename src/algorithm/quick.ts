@@ -40,6 +40,7 @@ const partition = (sortedArr: Bar[], low: number, high: number) => {
         isSwap: true,
       };
       swapObjArr.push(swapObj);
+      left = pivot;
       pivot = right;
     }
     while (
@@ -68,6 +69,7 @@ const partition = (sortedArr: Bar[], low: number, high: number) => {
         isSwap: true,
       };
       swapObjArr.push(swapObj);
+      right = pivot;
       pivot = left;
     }
   }

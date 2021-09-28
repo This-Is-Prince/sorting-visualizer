@@ -14,32 +14,41 @@ const Aside = () => {
     return true;
   };
   const { AppState, dispatch } = useContext(AppContext);
-  const handlePlay = (event: React.MouseEvent) => {
-    if (!checkEvent(event)) return;
+  const handlePlay = () => {
     if (AppState.whichAlgorithm === "") {
       dispatch({
         type: "OPEN_MODAL",
         payload: { for: "choose algorithm", id: 3 },
       });
-      return;
-    }
-    if (AppState.bars.length === 0) {
+    } else if (AppState.barsArray.length === 0) {
       dispatch({
         type: "OPEN_MODAL",
         payload: { for: "change array", id: 2 },
-      });
-      return;
-    }
-    if (!AppState.isSortDone) {
-      dispatch({
-        type: "PLAY",
-        payload: true,
       });
     } else {
-      dispatch({
-        type: "OPEN_MODAL",
-        payload: { for: "change array", id: 2 },
-      });
+      if (AppState.isNewBarsAdded) {
+        console.count("sort done");
+        dispatch({ type: "SORT_DONE", payload: false });
+        dispatch({ type: "NEW_BARS_ADDED", payload: false });
+      }
+      if (AppState.isSwapAnimationDone) {
+        dispatch({
+          type: "OPEN_MODAL",
+          payload: { for: "change array", id: 2 },
+        });
+        return;
+      }
+      if (AppState.isPlay) {
+        dispatch({
+          type: "PLAY",
+          payload: false,
+        });
+      } else {
+        dispatch({
+          type: "PLAY",
+          payload: true,
+        });
+      }
     }
   };
   return (

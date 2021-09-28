@@ -2,24 +2,36 @@ import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 
 export type ActionType =
   | { type: "PLAY"; payload: boolean }
-  | { type: "SORT_DONE" }
+  | { type: "SORT_DONE"; payload: boolean }
+  | { type: "SWAP_ANIMATION_DONE"; payload: boolean }
   | { type: "ADD_ALGORITHM"; payload: string }
   | { type: "ADD_ARRAY"; payload: Bar[] }
+  | { type: "NEW_BARS_ADDED"; payload: boolean }
   | { type: "ADD_SPEED"; payload: number }
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" }
-  | { type: "ADD_BARS"; payload: Bar[] }
   | { type: "CHANGE_SCREEN" }
   | { type: "ADD_SVG"; payload: any };
 
 export type ReducerType<S, A> = (state: S, action: A) => S;
 
 const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
+  if (action.type === "NEW_BARS_ADDED") {
+    return {
+      ...state,
+      isNewBarsAdded: action.payload,
+    };
+  }
   if (action.type === "SORT_DONE") {
     return {
       ...state,
-      isSortDone: true,
-      isPlay: false,
+      isSortDone: action.payload,
+    };
+  }
+  if (action.type === "SWAP_ANIMATION_DONE") {
+    return {
+      ...state,
+      isSwapAnimationDone: action.payload,
     };
   }
   if (action.type === "CHANGE_SCREEN") {
@@ -31,25 +43,14 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
   if (action.type === "ADD_SVG") {
     return {
       ...state,
-      isPlay: false,
-      isModalOpen: false,
-      isSortDone: false,
-      bars: [],
       svg: action.payload,
-    };
-  }
-  if (action.type === "ADD_BARS") {
-    return {
-      ...state,
-      bars: action.payload,
     };
   }
 
   if (action.type === "ADD_ARRAY") {
     return {
       ...state,
-      bars: action.payload,
-      isSortDone: false,
+      barsArray: action.payload,
     };
   }
   if (action.type === "ADD_ALGORITHM") {
