@@ -3,7 +3,6 @@ import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 export type ActionType =
   | { type: "PLAY"; payload: boolean }
   | { type: "SORT_DONE"; payload: boolean }
-  | { type: "SWAP_ANIMATION_DONE"; payload: boolean }
   | { type: "ADD_ALGORITHM"; payload: string }
   | { type: "ADD_ARRAY"; payload: Bar[] }
   | { type: "NEW_BARS_ADDED"; payload: boolean }
@@ -26,12 +25,6 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     return {
       ...state,
       isSortDone: action.payload,
-    };
-  }
-  if (action.type === "SWAP_ANIMATION_DONE") {
-    return {
-      ...state,
-      isSwapAnimationDone: action.payload,
     };
   }
   if (action.type === "CHANGE_SCREEN") {

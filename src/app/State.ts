@@ -55,7 +55,6 @@ export class Bar {
 export type ModalOpenPayloadType = { for: string; id: number };
 export interface AppStateType {
   isPlay: boolean;
-  isSwapAnimationDone: boolean;
   isModalOpen: boolean;
   modalState: ModalOpenPayloadType;
   whichAlgorithm: string;
@@ -72,11 +71,10 @@ export interface AppStateType {
 }
 const AppInitialState: AppStateType = {
   isPlay: false,
-  isSwapAnimationDone: false,
   isModalOpen: false,
   modalState: { for: "", id: 1 },
   whichAlgorithm: "",
-  speed: 750,
+  speed: 500,
   isSortDone: false,
   isNewBarsAdded: false,
   barsArray: [],
