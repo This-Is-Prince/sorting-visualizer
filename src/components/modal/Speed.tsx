@@ -8,7 +8,7 @@ const Speed = () => {
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch({
       type: "ADD_SPEED",
-      payload: e.currentTarget.value as "SLOW" | "FAST" | "NORMAL",
+      payload: parseInt(e.currentTarget.value),
     });
   };
   return (
@@ -18,9 +18,9 @@ const Speed = () => {
           type="radio"
           aria-label="slow"
           name="speed"
-          checked={AppState.speed === "SLOW"}
+          checked={AppState.speed === 1500}
           onChange={handleOnChange}
-          value="SLOW"
+          value="1500"
           className="radio flex-center"
         />
         <p className="flex-center">
@@ -35,9 +35,9 @@ const Speed = () => {
           type="radio"
           aria-label="normal"
           name="speed"
-          checked={AppState.speed === "NORMAL"}
+          checked={AppState.speed === 750}
           onChange={handleOnChange}
-          value="NORMAL"
+          value="750"
           className="radio flex-center"
         />
         <p className="flex-center">
@@ -52,9 +52,9 @@ const Speed = () => {
           type="radio"
           aria-label="fast"
           name="speed"
-          checked={AppState.speed === "FAST"}
+          checked={AppState.speed === 0}
           onChange={handleOnChange}
-          value="FAST"
+          value="0"
           className="radio flex-center"
         />
         <p className="flex-center">

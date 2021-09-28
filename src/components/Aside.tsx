@@ -20,6 +20,7 @@ const Aside = () => {
   const swapDone = () => {
     dispatch({
       type: "PLAY",
+      payload: false,
     });
     dispatch({
       type: "SORT_DONE",
@@ -51,16 +52,11 @@ const Aside = () => {
       return;
     }
     if (!AppState.isSortDone) {
-      let speed =
-        AppState.speed === "FAST"
-          ? 0
-          : AppState.speed === "NORMAL"
-          ? 750
-          : 1500;
       sortBars = [];
-      sortBars = Sort(AppState.whichAlgorithm, speed, AppState.bars);
+      sortBars = Sort(AppState.whichAlgorithm, AppState.speed, AppState.bars);
       dispatch({
         type: "PLAY",
+        payload: true,
       });
     } else {
       dispatch({

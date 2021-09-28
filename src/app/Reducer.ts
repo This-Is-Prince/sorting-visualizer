@@ -2,13 +2,13 @@ import React from "react";
 import { AppStateType, ModalOpenPayloadType, Bar } from "./State";
 
 export type ActionType =
-  | { type: "PLAY" }
+  | { type: "PLAY"; payload: boolean }
   | { type: "SELECT_ALGORITHM" }
   | { type: "SELECT_ARRAY" }
   | { type: "SORT_DONE" }
   | { type: "ADD_ALGORITHM"; payload: string }
   | { type: "ADD_SIZE"; payload: number }
-  | { type: "ADD_SPEED"; payload: "SLOW" | "FAST" | "NORMAL" }
+  | { type: "ADD_SPEED"; payload: number }
   | { type: "OPEN_MODAL"; payload: ModalOpenPayloadType }
   | { type: "CLOSE_MODAL" }
   | { type: "ADD_BARS"; payload: Bar[] }
@@ -106,7 +106,7 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
   if (action.type === "PLAY") {
     return {
       ...state,
-      isPlay: !state.isPlay,
+      isPlay: action.payload,
     };
   }
   if (action.type === "CLOSE_MODAL") {

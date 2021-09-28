@@ -58,7 +58,7 @@ export interface AppStateType {
   isModalOpen: boolean;
   modalState: ModalOpenPayloadType;
   whichAlgorithm: string;
-  speed: "SLOW" | "FAST" | "NORMAL";
+  speed: number;
   isSortDone: boolean;
   isAlgoBannerOpen: boolean;
   isSizeBannerOpen: boolean;
@@ -76,7 +76,7 @@ const AppInitialState: AppStateType = {
   isModalOpen: false,
   modalState: { for: "", id: 1 },
   whichAlgorithm: "",
-  speed: "NORMAL",
+  speed: 750,
   isSortDone: false,
   isAlgoBannerOpen: false,
   isSizeBannerOpen: false,
