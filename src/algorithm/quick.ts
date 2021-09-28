@@ -31,6 +31,7 @@ const partition = (bars: Bar[], low: number, high: number) => {
         second,
       };
       sortArr.push(barObj);
+      pivot = right;
     }
     while (
       bars[left].getHeight() <= bars[pivot].getHeight() &&
@@ -49,6 +50,7 @@ const partition = (bars: Bar[], low: number, high: number) => {
         second,
       };
       sortArr.push(barObj);
+      pivot = left;
     }
   }
 };
@@ -60,8 +62,11 @@ const quickSortMain = (barsArr: Bar[], low: number, high: number) => {
   }
 };
 const quickSort = (barsArr: Bar[]) => {
+  console.log(barsArr);
   let bars = [...barsArr];
+  sortArr = [];
   quickSortMain(bars, 0, barsArr.length - 1);
+  console.log(bars);
   return { sortArr, bars };
 };
 export default quickSort;
