@@ -21,9 +21,9 @@ const Size = () => {
       );
       barArray.push(bar);
     }
-    dispatch({ type: "ADD_ARRAY", payload: barArray });
+    dispatch({ type: "SORT_DONE", payload: false });
     dispatch({ type: "NEW_BARS_ADDED", payload: true });
-    dispatch({ type: "SWAP_ANIMATION_DONE", payload: false });
+    dispatch({ type: "ADD_ARRAY", payload: barArray });
   };
   return (
     <article className="modal__content flex-center">

@@ -7,101 +7,6 @@ import sort from "../algorithm/sort";
 
 const Main = () => {
   const { AppState, dispatch } = useContext(AppContext);
-  const mainRef = useRef<HTMLElement>({} as HTMLElement);
-  const animationRef = useRef(0);
-  const sortedArrRef = useRef([] as Bar[]);
-  const swapObjArrRef = useRef([] as SwapObjType[]);
-  const indexRef = useRef(-1);
-
-  let swap = (swapObjArr: SwapObjType[], currIndex: number, speed: number) => {
-    console.count("in swap");
-
-    if (currIndex >= swapObjArr.length) {
-      dispatch({ type: "ADD_ARRAY", payload: sortedArrRef.current });
-      dispatch({ type: "NEW_BARS_ADDED", payload: true });
-      dispatch({ type: "SWAP_ANIMATION_DONE", payload: true });
-      cancelAnimationFrame(animationRef.current);
-      return;
-    }
-    if (currIndex != 0) {
-      let first = swapObjArr[currIndex - 1].first;
-      let second = swapObjArr[currIndex - 1].second;
-      d3.select(`#${first.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", first.getColor());
-      d3.select(`#${second.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", second.getColor());
-    }
-    let first = swapObjArr[currIndex].first;
-    let second = swapObjArr[currIndex].second;
-    if (swapObjArr[currIndex].isSwap) {
-      let firstX = second.getX();
-      let secondX = first.getX();
-      first.setX(firstX);
-      second.setX(secondX);
-      d3.select(`#${first.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ffd803")
-        .attr("x", first.getX());
-      d3.select(`#${second.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ffd803")
-        .attr("x", second.getX())
-        .on("end", () => {
-          animationRef.current = requestAnimationFrame(animateSort);
-        });
-    } else {
-      d3.select(`#${first.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ff5470");
-      d3.select(`#${second.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ff5470")
-        .on("end", () => {
-          animationRef.current = requestAnimationFrame(animateSort);
-        });
-    }
-  };
-  const animateSort = () => {
-    console.count("animationSort");
-    swap(swapObjArrRef.current, indexRef.current + 1, AppState.speed);
-    indexRef.current++;
-  };
-  useEffect(() => {
-    console.count("in useEffect[AppState.isSortDone,AppState.isPlay]");
-
-    if (!AppState.isSortDone) {
-      console.count("in sort");
-
-      console.count(`when appState.isSortDone ->${AppState.isSortDone} `);
-      const { swapObjArr, sortedArr } = sort(
-        AppState.whichAlgorithm,
-        AppState.barsArray
-      );
-      sortedArrRef.current = sortedArr;
-      swapObjArrRef.current = swapObjArr;
-      indexRef.current = -1;
-      animationRef.current = requestAnimationFrame(animateSort);
-      dispatch({ type: "SORT_DONE", payload: true });
-      return () => {
-        cancelAnimationFrame(animationRef.current);
-      };
-    }
-    return () => {
-      console.count(`return when appState.isPlay ->${AppState.isPlay} `);
-      console.count(
-        `return when appState.isSortDone ->${AppState.isSortDone} `
-      );
-    };
-  }, [AppState.isSortDone]);
-
   const resize = () => {
     let width = mainRef.current.getBoundingClientRect().width - 20;
     let height = mainRef.current.getBoundingClientRect().height - 20;
@@ -136,6 +41,93 @@ const Main = () => {
         .attr("fill", bar.getColor());
     });
   }, [AppState.barsArray]);
+
+  // Refs
+  const mainRef = useRef<HTMLElement>({} as HTMLElement);
+  const animationRef = useRef(0);
+  const sortedArrRef = useRef([] as Bar[]);
+  const swapObjArrRef = useRef([] as SwapObjType[]);
+  const indexRef = useRef(-1);
+  const animateSortRef = useRef(() => {
+    swap(swapObjArrRef.current, indexRef.current + 1, AppState.speed);
+  });
+
+  let swap = (swapObjArr: SwapObjType[], currIndex: number, speed: number) => {
+    if (currIndex >= swapObjArr.length) {
+      dispatch({ type: "ADD_ARRAY", payload: sortedArrRef.current });
+      dispatch({ type: "SORT_DONE", payload: true });
+      dispatch({ type: "PLAY", payload: false });
+      cancelAnimationFrame(animationRef.current);
+      return;
+    }
+    if (currIndex != 0) {
+      let first = swapObjArr[currIndex - 1].first;
+      let second = swapObjArr[currIndex - 1].second;
+      d3.select(`#${first.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", first.getColor());
+      d3.select(`#${second.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", second.getColor());
+    }
+    let first = swapObjArr[currIndex].first;
+    let second = swapObjArr[currIndex].second;
+    if (swapObjArr[currIndex].isSwap) {
+      let firstX = second.getX();
+      let secondX = first.getX();
+      first.setX(firstX);
+      second.setX(secondX);
+      d3.select(`#${first.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ffd803")
+        .attr("x", first.getX());
+      d3.select(`#${second.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ffd803")
+        .attr("x", second.getX())
+        .on("end", () => {
+          animationRef.current = requestAnimationFrame(animateSortRef.current);
+        });
+    } else {
+      d3.select(`#${first.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ff5470");
+      d3.select(`#${second.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ff5470")
+        .on("end", () => {
+          animationRef.current = requestAnimationFrame(animateSortRef.current);
+        });
+    }
+    indexRef.current++;
+  };
+  useEffect(() => {
+    const { swapObjArr, sortedArr } = sort(
+      AppState.whichAlgorithm,
+      AppState.barsArray
+    );
+    sortedArrRef.current = sortedArr;
+    swapObjArrRef.current = swapObjArr;
+    indexRef.current = -1;
+  }, [AppState.barsArray]);
+  useEffect(() => {
+    if (AppState.isPlay) {
+      animateSortRef.current = () => {
+        swap(swapObjArrRef.current, indexRef.current + 1, AppState.speed);
+      };
+      animationRef.current = requestAnimationFrame(animateSortRef.current);
+    } else {
+      animateSortRef.current = () => {};
+      cancelAnimationFrame(animationRef.current);
+    }
+  }, [AppState.isPlay]);
+
   return <main ref={mainRef} id="main" className="main"></main>;
 };
 

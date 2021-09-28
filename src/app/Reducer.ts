@@ -44,6 +44,11 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     return {
       ...state,
       svg: action.payload,
+      isPlay: false,
+      isSwapAnimationDone: false,
+      barsArray: [],
+      isNewBarsAdded: false,
+      isSortDone: false,
     };
   }
 

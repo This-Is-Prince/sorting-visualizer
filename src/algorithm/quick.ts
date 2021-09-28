@@ -82,11 +82,9 @@ const quickSortMain = (sortedArr: Bar[], low: number, high: number) => {
   }
 };
 const quickSort = (unSortedArr: Bar[]) => {
-  console.log(unSortedArr);
   let sortedArr = [...unSortedArr];
   swapObjArr = [];
   quickSortMain(sortedArr, 0, sortedArr.length - 1);
-  console.log(sortedArr);
   return { swapObjArr, sortedArr };
 };
 export default quickSort;

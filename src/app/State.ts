@@ -77,7 +77,7 @@ const AppInitialState: AppStateType = {
   modalState: { for: "", id: 1 },
   whichAlgorithm: "",
   speed: 750,
-  isSortDone: true,
+  isSortDone: false,
   isNewBarsAdded: false,
   barsArray: [],
   svg: { box: undefined, height: 0, width: 0 },

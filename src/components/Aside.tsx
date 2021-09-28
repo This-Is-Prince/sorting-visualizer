@@ -5,6 +5,7 @@ import { FaPauseCircle, FaPlayCircle, FaSitemap } from "react-icons/fa";
 import AppContext from "../app/AppContext";
 
 const Aside = () => {
+  const { AppState, dispatch } = useContext(AppContext);
   const checkEvent = (event: React.MouseEvent) => {
     if (AppState.isPlay) {
       event.preventDefault();
@@ -13,42 +14,22 @@ const Aside = () => {
     }
     return true;
   };
-  const { AppState, dispatch } = useContext(AppContext);
   const handlePlay = () => {
     if (AppState.whichAlgorithm === "") {
       dispatch({
         type: "OPEN_MODAL",
         payload: { for: "choose algorithm", id: 3 },
       });
-    } else if (AppState.barsArray.length === 0) {
+    } else if (AppState.barsArray.length === 0 || AppState.isSortDone) {
       dispatch({
         type: "OPEN_MODAL",
         payload: { for: "change array", id: 2 },
       });
     } else {
-      if (AppState.isNewBarsAdded) {
-        console.count("sort done");
-        dispatch({ type: "SORT_DONE", payload: false });
-        dispatch({ type: "NEW_BARS_ADDED", payload: false });
-      }
-      if (AppState.isSwapAnimationDone) {
-        dispatch({
-          type: "OPEN_MODAL",
-          payload: { for: "change array", id: 2 },
-        });
-        return;
-      }
-      if (AppState.isPlay) {
-        dispatch({
-          type: "PLAY",
-          payload: false,
-        });
-      } else {
-        dispatch({
-          type: "PLAY",
-          payload: true,
-        });
-      }
+      dispatch({
+        type: "PLAY",
+        payload: !AppState.isPlay,
+      });
     }
   };
   return (
