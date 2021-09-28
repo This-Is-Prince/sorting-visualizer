@@ -1,11 +1,16 @@
 import { useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
+import { intervalID } from "../algorithm/sort";
 
 const Main = () => {
   const mainRef = useRef<HTMLElement>({} as HTMLElement);
   const { AppState, dispatch } = useContext(AppContext);
   const resize = () => {
+    clearInterval(intervalID);
+    dispatch({
+      type: "SORT_DONE",
+    });
     let width = mainRef.current.getBoundingClientRect().width - 20;
     let height = mainRef.current.getBoundingClientRect().height - 20;
     d3.selectAll(".bar").remove();

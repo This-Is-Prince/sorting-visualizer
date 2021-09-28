@@ -22,6 +22,7 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     return {
       ...state,
       isSortDone: true,
+      isPlay: false,
     };
   }
   if (action.type === "CHANGE_SCREEN") {
