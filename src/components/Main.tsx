@@ -4,11 +4,6 @@ import * as d3 from "d3";
 import quickSort, { SwapObjType } from "../algorithm/quick";
 import { Bar } from "../app/State";
 
-interface ArrType {
-  first: Bar;
-  second: Bar;
-}
-
 const Main = () => {
   const { AppState, dispatch } = useContext(AppContext);
   const mainRef = useRef<HTMLElement>({} as HTMLElement);
@@ -17,7 +12,7 @@ const Main = () => {
   const swapObjArrRef = useRef([] as SwapObjType[]);
   const indexRef = useRef(-1);
 
-  let swap = (swapObjArr: ArrType[], currIndex: number, speed: number) => {
+  let swap = (swapObjArr: SwapObjType[], currIndex: number, speed: number) => {
     if (currIndex >= swapObjArr.length) {
       dispatch({
         type: "ADD_BARS",
@@ -43,23 +38,37 @@ const Main = () => {
     }
     let first = swapObjArr[currIndex].first;
     let second = swapObjArr[currIndex].second;
-    let firstX = second.getX();
-    let secondX = first.getX();
-    first.setX(firstX);
-    second.setX(secondX);
-    d3.select(`#${first.getId()}`)
-      .transition()
-      .duration(speed)
-      .attr("fill", "#ffd803")
-      .attr("x", first.getX());
-    d3.select(`#${second.getId()}`)
-      .transition()
-      .duration(speed)
-      .attr("fill", "#ffd803")
-      .attr("x", second.getX())
-      .on("end", () => {
-        animationRef.current = requestAnimationFrame(animateSort);
-      });
+    if (swapObjArr[currIndex].isSwap) {
+      let firstX = second.getX();
+      let secondX = first.getX();
+      first.setX(firstX);
+      second.setX(secondX);
+      d3.select(`#${first.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ffd803")
+        .attr("x", first.getX());
+      d3.select(`#${second.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ffd803")
+        .attr("x", second.getX())
+        .on("end", () => {
+          animationRef.current = requestAnimationFrame(animateSort);
+        });
+    } else {
+      d3.select(`#${first.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ff5470");
+      d3.select(`#${second.getId()}`)
+        .transition()
+        .duration(speed)
+        .attr("fill", "#ff5470")
+        .on("end", () => {
+          animationRef.current = requestAnimationFrame(animateSort);
+        });
+    }
   };
   const animateSort = () => {
     console.log("animationSort");

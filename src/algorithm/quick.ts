@@ -5,7 +5,7 @@ const swap = (sortedArr: Bar[], i: number, j: number) => {
   sortedArr[i] = sortedArr[j];
   sortedArr[j] = temp;
 };
-export type SwapObjType = { first: Bar; second: Bar };
+export type SwapObjType = { first: Bar; second: Bar; isSwap: boolean };
 
 let swapObjArr: SwapObjType[] = [];
 
@@ -18,6 +18,14 @@ const partition = (sortedArr: Bar[], low: number, high: number) => {
       sortedArr[pivot].getHeight() <= sortedArr[right].getHeight() &&
       pivot !== right
     ) {
+      let first = sortedArr[pivot];
+      let second = sortedArr[right];
+      let swapObj = {
+        first,
+        second,
+        isSwap: false,
+      };
+      swapObjArr.push(swapObj);
       right--;
     }
     if (pivot === right) {
@@ -29,6 +37,7 @@ const partition = (sortedArr: Bar[], low: number, high: number) => {
       let swapObj = {
         first,
         second,
+        isSwap: true,
       };
       swapObjArr.push(swapObj);
       pivot = right;
@@ -37,6 +46,14 @@ const partition = (sortedArr: Bar[], low: number, high: number) => {
       sortedArr[left].getHeight() <= sortedArr[pivot].getHeight() &&
       pivot !== left
     ) {
+      let first = sortedArr[left];
+      let second = sortedArr[pivot];
+      let swapObj = {
+        first,
+        second,
+        isSwap: false,
+      };
+      swapObjArr.push(swapObj);
       left++;
     }
     if (pivot === left) {
@@ -48,6 +65,7 @@ const partition = (sortedArr: Bar[], low: number, high: number) => {
       let swapObj = {
         first,
         second,
+        isSwap: true,
       };
       swapObjArr.push(swapObj);
       pivot = left;
