@@ -82,23 +82,34 @@ const Main = () => {
     let second = swapObjArr[currIndex].second;
     if (AppState.whichAlgorithm === "merge") {
       console.log("in merge");
-      d3.select(`#${first.getId()}`).remove();
+      // d3.select(`#${first.getId()}`).remove();
       AppState.svg.box
         .append("rect")
         .attr("class", "bar")
-        .attr("id", first.getId())
+        .attr("id", "copy")
         .attr("x", second.getX())
         .attr("y", second.getY())
         .attr("width", second.getWidth())
         .attr("height", second.getHeight())
-        .attr("fill", "#ffd803");
+        .attr("fill", "#00214d");
       // ex.
-      d3.select(`#${first.getId()}`)
+      d3.select(`#copy`)
         .transition()
         .duration(speed)
         .attr("fill", "#ffd803")
         .attr("x", first.getX())
         .on("end", () => {
+          d3.select(`#${first.getId()}`).remove();
+          d3.select("#copy").remove();
+          AppState.svg.box
+            .append("rect")
+            .attr("class", "bar")
+            .attr("id", first.getId())
+            .attr("x", first.getX())
+            .attr("y", second.getY())
+            .attr("width", second.getWidth())
+            .attr("height", second.getHeight())
+            .attr("fill", "#ffd803");
           animationRef.current = requestAnimationFrame(animateSortRef.current);
         });
     } else {
