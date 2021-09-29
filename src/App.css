@@ -65,10 +65,6 @@ body {
   background-color: var(--clr-bg);
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .flex-center {
@@ -112,6 +108,7 @@ GLOBAL CSS END
   flex-direction: column;
   background: url("./images/aside.svg") no-repeat center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .btn {
@@ -192,6 +189,7 @@ GLOBAL CSS END
   align-items: center;
 }
 .radio {
+  -webkit-appearance: none;
   appearance: none;
   width: 1.5rem;
   height: 1.5rem;
@@ -221,6 +219,7 @@ GLOBAL CSS END
   width: 100%;
 }
 .range {
+  -webkit-appearance: none;
   appearance: none;
   width: 100%;
   background-color: var(--clr-ter);
@@ -229,6 +228,17 @@ GLOBAL CSS END
   cursor: pointer;
 }
 .range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: var(--clr-text);
+  border-radius: 100%;
+  border: 0.15rem solid var(--clr-bg);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.range::-moz-range-thumb {
+  -webkit-appearance: none;
   appearance: none;
   width: 20px;
   height: 20px;
