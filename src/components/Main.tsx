@@ -30,6 +30,9 @@ const Main = () => {
   useEffect(() => {
     d3.selectAll(".bar").remove();
     AppState.barsArray.forEach((bar) => {
+      console.log(bar);
+
+      console.count("hi");
       AppState.svg.box
         .append("rect")
         .attr("class", "bar")
@@ -54,9 +57,12 @@ const Main = () => {
 
   let swap = (swapObjArr: SwapObjType[], currIndex: number, speed: number) => {
     if (currIndex >= swapObjArr.length) {
+      console.log(sortedArrRef.current);
       dispatch({ type: "ADD_ARRAY", payload: sortedArrRef.current });
       dispatch({ type: "SORT_DONE", payload: true });
       dispatch({ type: "PLAY", payload: false });
+      console.log(d3.selectAll(".bar"));
+
       cancelAnimationFrame(animationRef.current);
       return;
     }
@@ -74,36 +80,63 @@ const Main = () => {
     }
     let first = swapObjArr[currIndex].first;
     let second = swapObjArr[currIndex].second;
-    if (swapObjArr[currIndex].isSwap) {
-      let firstX = second.getX();
-      let secondX = first.getX();
-      first.setX(firstX);
-      second.setX(secondX);
+    if (AppState.whichAlgorithm === "merge") {
+      console.log("in merge");
+      d3.select(`#${first.getId()}`).remove();
+      AppState.svg.box
+        .append("rect")
+        .attr("class", "bar")
+        .attr("id", first.getId())
+        .attr("x", second.getX())
+        .attr("y", second.getY())
+        .attr("width", second.getWidth())
+        .attr("height", second.getHeight())
+        .attr("fill", "#ffd803");
+      // ex.
       d3.select(`#${first.getId()}`)
         .transition()
         .duration(speed)
         .attr("fill", "#ffd803")
-        .attr("x", first.getX());
-      d3.select(`#${second.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ffd803")
-        .attr("x", second.getX())
+        .attr("x", first.getX())
         .on("end", () => {
           animationRef.current = requestAnimationFrame(animateSortRef.current);
         });
     } else {
-      d3.select(`#${first.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ff5470");
-      d3.select(`#${second.getId()}`)
-        .transition()
-        .duration(speed)
-        .attr("fill", "#ff5470")
-        .on("end", () => {
-          animationRef.current = requestAnimationFrame(animateSortRef.current);
-        });
+      if (swapObjArr[currIndex].isSwap) {
+        let firstX = second.getX();
+        let secondX = first.getX();
+        first.setX(firstX);
+        second.setX(secondX);
+        d3.select(`#${first.getId()}`)
+          .transition()
+          .duration(speed)
+          .attr("fill", "#ffd803")
+          .attr("x", first.getX());
+        d3.select(`#${second.getId()}`)
+          .transition()
+          .duration(speed)
+          .attr("fill", "#ffd803")
+          .attr("x", second.getX())
+          .on("end", () => {
+            animationRef.current = requestAnimationFrame(
+              animateSortRef.current
+            );
+          });
+      } else {
+        d3.select(`#${first.getId()}`)
+          .transition()
+          .duration(speed)
+          .attr("fill", "#ff5470");
+        d3.select(`#${second.getId()}`)
+          .transition()
+          .duration(speed)
+          .attr("fill", "#ff5470")
+          .on("end", () => {
+            animationRef.current = requestAnimationFrame(
+              animateSortRef.current
+            );
+          });
+      }
     }
     indexRef.current++;
   };
@@ -115,7 +148,8 @@ const Main = () => {
     sortedArrRef.current = sortedArr;
     swapObjArrRef.current = swapObjArr;
     indexRef.current = -1;
-  }, [AppState.barsArray, AppState.whichAlgorithm]);
+    dispatch({ type: "NEW_BARS_ADDED", payload: false });
+  }, [AppState.isNewBarsAdded, AppState.whichAlgorithm]);
   useEffect(() => {
     if (AppState.isPlay) {
       animateSortRef.current = () => {
