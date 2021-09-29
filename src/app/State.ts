@@ -68,6 +68,7 @@ export interface AppStateType {
     height: number;
   };
   isFullScreen: boolean;
+  isAlgorithmModelOpen: boolean;
 }
 const AppInitialState: AppStateType = {
   isPlay: false,
@@ -80,5 +81,6 @@ const AppInitialState: AppStateType = {
   barsArray: [],
   svg: { box: undefined, height: 0, width: 0 },
   isFullScreen: false,
+  isAlgorithmModelOpen: true,
 };
 export default AppInitialState;

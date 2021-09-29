@@ -4,6 +4,7 @@ export type ActionType =
   | { type: "PLAY"; payload: boolean }
   | { type: "SORT_DONE"; payload: boolean }
   | { type: "ADD_ALGORITHM"; payload: string }
+  | { type: "OPEN_ALGORITHM_MODAL"; payload: boolean }
   | { type: "ADD_ARRAY"; payload: Bar[] }
   | { type: "NEW_BARS_ADDED"; payload: boolean }
   | { type: "ADD_SPEED"; payload: number }
@@ -42,6 +43,7 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
       isNewBarsAdded: false,
       isSortDone: false,
       whichAlgorithm: "",
+      isAlgorithmModelOpen: true,
     };
   }
 
@@ -55,6 +57,12 @@ const Reducer: ReducerType<AppStateType, ActionType> = (state, action) => {
     return {
       ...state,
       whichAlgorithm: action.payload,
+    };
+  }
+  if (action.type === "OPEN_ALGORITHM_MODAL") {
+    return {
+      ...state,
+      isAlgorithmModelOpen: action.payload,
     };
   }
   if (action.type === "ADD_SPEED") {

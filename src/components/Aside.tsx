@@ -15,17 +15,20 @@ const Aside = () => {
     return true;
   };
   const handlePlay = () => {
-    if (AppState.whichAlgorithm === "") {
-      dispatch({
-        type: "OPEN_MODAL",
-        payload: { for: "choose algorithm", id: 3 },
-      });
-    } else if (AppState.barsArray.length === 0 || AppState.isSortDone) {
+    if (AppState.barsArray.length === 0 || AppState.isSortDone) {
       dispatch({
         type: "OPEN_MODAL",
         payload: { for: "change array", id: 2 },
       });
+    } else if (AppState.whichAlgorithm === "") {
+      dispatch({
+        type: "OPEN_MODAL",
+        payload: { for: "choose algorithm", id: 3 },
+      });
     } else {
+      if (AppState.isAlgorithmModelOpen) {
+        dispatch({ type: "OPEN_ALGORITHM_MODAL", payload: false });
+      }
       dispatch({
         type: "PLAY",
         payload: !AppState.isPlay,
@@ -65,8 +68,8 @@ const Aside = () => {
       <button
         className={`flex-center btn algo`}
         aria-label="algorithm"
-        onClick={(event) => {
-          if (checkEvent(event) && AppState.isSortDone) {
+        onClick={() => {
+          if (AppState.isAlgorithmModelOpen) {
             dispatch({
               type: "OPEN_MODAL",
               payload: { for: "choose algorithm", id: 3 },

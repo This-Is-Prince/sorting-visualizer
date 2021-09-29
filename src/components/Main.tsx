@@ -54,6 +54,7 @@ const Main = () => {
 
   let swap = (swapObjArr: SwapObjType[], currIndex: number, speed: number) => {
     if (currIndex >= swapObjArr.length) {
+      dispatch({ type: "OPEN_ALGORITHM_MODAL", payload: true });
       dispatch({ type: "ADD_ARRAY", payload: sortedArrRef.current });
       dispatch({ type: "SORT_DONE", payload: true });
       dispatch({ type: "PLAY", payload: false });

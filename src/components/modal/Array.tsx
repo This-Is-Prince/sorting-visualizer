@@ -21,6 +21,7 @@ const Size = () => {
       );
       barArray.push(bar);
     }
+    dispatch({ type: "OPEN_ALGORITHM_MODAL", payload: true });
     dispatch({ type: "SORT_DONE", payload: false });
     dispatch({ type: "NEW_BARS_ADDED", payload: true });
     dispatch({ type: "ADD_ARRAY", payload: barArray });
