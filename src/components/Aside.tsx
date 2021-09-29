@@ -66,7 +66,7 @@ const Aside = () => {
         className={`flex-center btn algo`}
         aria-label="algorithm"
         onClick={(event) => {
-          if (checkEvent(event)) {
+          if (checkEvent(event) && AppState.isSortDone) {
             dispatch({
               type: "OPEN_MODAL",
               payload: { for: "choose algorithm", id: 3 },

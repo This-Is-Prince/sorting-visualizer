@@ -164,7 +164,6 @@ const mergeSort = (unSortedArr: Bar[]) => {
   let sortedArr = [...unSortedArr];
   swapObjArr = [];
   mergeSortMain(sortedArr, 0, sortedArr.length - 1);
-  console.log(sortedArr);
   return { swapObjArr, sortedArr };
 };
 export default mergeSort;
