@@ -111,21 +111,39 @@ const Main = () => {
         let secondX = first.getX();
         first.setX(firstX);
         second.setX(secondX);
-        d3.select(`#${first.getId()}`)
-          .transition()
-          .duration(speed)
-          .attr("fill", "#ffd803")
-          .attr("x", first.getX());
-        d3.select(`#${second.getId()}`)
-          .transition()
-          .duration(speed)
-          .attr("fill", "#ffd803")
-          .attr("x", second.getX())
-          .on("end", () => {
-            animationRef.current = requestAnimationFrame(
-              animateSortRef.current
-            );
-          });
+        if (swapObjArr[currIndex].isMakeHeap) {
+          d3.select(`#${first.getId()}`)
+            .transition()
+            .duration(speed)
+            .attr("fill", "#ff5470")
+            .attr("x", first.getX());
+          d3.select(`#${second.getId()}`)
+            .transition()
+            .duration(speed)
+            .attr("fill", "#ff5470")
+            .attr("x", second.getX())
+            .on("end", () => {
+              animationRef.current = requestAnimationFrame(
+                animateSortRef.current
+              );
+            });
+        } else {
+          d3.select(`#${first.getId()}`)
+            .transition()
+            .duration(speed)
+            .attr("fill", "#ffd803")
+            .attr("x", first.getX());
+          d3.select(`#${second.getId()}`)
+            .transition()
+            .duration(speed)
+            .attr("fill", "#ffd803")
+            .attr("x", second.getX())
+            .on("end", () => {
+              animationRef.current = requestAnimationFrame(
+                animateSortRef.current
+              );
+            });
+        }
       } else {
         d3.select(`#${first.getId()}`)
           .transition()

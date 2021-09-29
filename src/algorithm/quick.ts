@@ -5,7 +5,12 @@ const swap = (sortedArr: Bar[], i: number, j: number) => {
   sortedArr[i] = sortedArr[j];
   sortedArr[j] = temp;
 };
-export type SwapObjType = { first: Bar; second: Bar; isSwap: boolean };
+export type SwapObjType = {
+  first: Bar;
+  second: Bar;
+  isSwap: boolean;
+  isMakeHeap?: boolean;
+};
 
 let swapObjArr: SwapObjType[] = [];
 

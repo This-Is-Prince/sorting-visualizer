@@ -100,8 +100,10 @@ GLOBAL CSS END
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: aqua;
 }
 .main svg {
+  background-color: white;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .aside {

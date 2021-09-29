@@ -12,7 +12,7 @@ const Size = () => {
     for (let i = 0; i < size; i++) {
       let bar = new Bar(
         ratio,
-        Math.floor(Math.random() * height),
+        Math.floor(Math.random() * (height - 10)) + 10,
         `bar-${i}`,
         "#00214d",
         0,

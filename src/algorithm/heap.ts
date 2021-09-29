@@ -98,6 +98,7 @@ const makeHeap = (unSortedArr: Bar[]) => {
         first,
         second,
         isSwap: true,
+        isMakeHeap: true,
       };
       swapObjArr.push(swapObj);
       swap(unSortedArr, child, parent);
