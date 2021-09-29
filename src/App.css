@@ -15,8 +15,8 @@
   /* z-index*/
   --modal-z-index: 100;
   --full-screen-modal-z-index: 101;
-  --footer-z-index: 99;
 }
+
 .full-screen-modal {
   position: absolute;
   z-index: var(--full-screen-modal-z-index);
