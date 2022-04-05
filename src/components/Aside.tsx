@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { IoMdSpeedometer } from "react-icons/io";
 import { VscSymbolArray } from "react-icons/vsc";
 import { FaPauseCircle, FaPlayCircle, FaSitemap } from "react-icons/fa";

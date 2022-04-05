@@ -1,12 +1,6 @@
 import { Bar } from "../app/State";
 import { SwapObjType } from "../types";
 
-const swap = (sortedArr: Bar[], i: number, j: number) => {
-  let temp = sortedArr[i];
-  sortedArr[i] = sortedArr[j];
-  sortedArr[j] = temp;
-};
-
 let swapObjArr: SwapObjType[] = [];
 const merge = (sortedArr: Bar[], start: number, mid: number, end: number) => {
   let lStart = mid - start + 1;

@@ -1,11 +1,6 @@
 import { Bar } from "../app/State";
 import { SwapObjType } from "../types";
-
-const swap = (sortedArr: Bar[], i: number, j: number) => {
-  let temp = sortedArr[i];
-  sortedArr[i] = sortedArr[j];
-  sortedArr[j] = temp;
-};
+import { swap } from "./sort";
 
 let swapObjArr: SwapObjType[] = [];
 

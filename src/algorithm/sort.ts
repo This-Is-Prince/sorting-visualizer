@@ -5,6 +5,12 @@ import heapSort from "./heap";
 import mergeSort from "./merge";
 import quickSort from "./quick";
 
+export const swap = (sortedArr: Bar[], i: number, j: number) => {
+  let temp = sortedArr[i];
+  sortedArr[i] = sortedArr[j];
+  sortedArr[j] = temp;
+};
+
 const sort = (whichAlgorithm: string, unSortedArr: Bar[]) => {
   let returnValue: { swapObjArr: SwapObjType[]; sortedArr: Bar[] };
   switch (whichAlgorithm) {

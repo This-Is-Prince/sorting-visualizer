@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef } from "react";
 import AppContext from "../app/AppContext";
 import * as d3 from "d3";
-import { SwapObjType } from "../algorithm/quick";
 import { Bar } from "../app/State";
 import sort from "../algorithm/sort";
+import { SwapObjType } from "../types";
 
 const Main = () => {
   const { AppState, dispatch } = useContext(AppContext);
