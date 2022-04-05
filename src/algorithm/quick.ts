@@ -1,15 +1,10 @@
 import { Bar } from "../app/State";
+import { SwapObjType } from "../types";
 
 const swap = (sortedArr: Bar[], i: number, j: number) => {
   let temp = sortedArr[i];
   sortedArr[i] = sortedArr[j];
   sortedArr[j] = temp;
-};
-export type SwapObjType = {
-  first: Bar;
-  second: Bar;
-  isSwap: boolean;
-  isMakeHeap?: boolean;
 };
 
 let swapObjArr: SwapObjType[] = [];

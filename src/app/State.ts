@@ -1,3 +1,5 @@
+import { AppStateType } from "../types";
+
 export class Bar {
   constructor(
     private width: number,
@@ -52,24 +54,6 @@ export class Bar {
   }
 }
 
-export type ModalOpenPayloadType = { for: string; id: number };
-export interface AppStateType {
-  isPlay: boolean;
-  isModalOpen: boolean;
-  modalState: ModalOpenPayloadType;
-  whichAlgorithm: string;
-  speed: number;
-  isSortDone: boolean;
-  barsArray: Bar[];
-  isNewBarsAdded: boolean;
-  svg: {
-    box: any;
-    width: number;
-    height: number;
-  };
-  isFullScreen: boolean;
-  isAlgorithmModelOpen: boolean;
-}
 const AppInitialState: AppStateType = {
   isPlay: false,
   isModalOpen: false,

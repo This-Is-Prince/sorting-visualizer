@@ -1,5 +1,5 @@
 import { Bar } from "../app/State";
-import { SwapObjType } from "./quick";
+import { SwapObjType } from "../types";
 
 const bubbleSort = (unSortedArr: Bar[]) => {
   let sortedArr = [...unSortedArr];
